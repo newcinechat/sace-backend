@@ -1,0 +1,27 @@
+{
+    "empresas": [
+        {
+            "id": 1,
+            "nome_fantasia": "GeoBrasi Topografia",
+            "proposta_base": 4500,
+            "margem_sace": 10,
+            "status": "Disponível Imediato"
+        },
+        {
+            "id": 2,
+            "nome_fantasia": "NorteSul Regularizações",
+            "proposta_base": 6200,
+            "margem_sace": 12,
+            "status": "Em Análise Técnica"
+        }
+    ],
+    "operadores": [
+        {
+            "id": 1,
+            "nome": "Carlos Eduardo da Silva",
+            "cargo": "Piloto de Drone",
+            "diaria": 450,
+            "cidade": "Sobradinho - DF"
+        }
+    ]
+}
