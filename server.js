@@ -4,25 +4,21 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-// Configura para servir arquivos estáticos (como o index.html)
+
+// 1. Configura para servir arquivos estáticos da pasta atual
 app.use(express.static(__dirname));
 
-// Rota principal para abrir a interface visual
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Inicializa banco de dados SQLite local
+// 2. Inicializa banco de dados SQLite local
 const db = new sqlite3.Database('./sace.db', (err) => {
     if (err) console.error('Erro ao abrir o SQLite', err.message);
-    else console.log('📦 Conectado ao banco de dados SQLite (sace.db).');
+    else console.log('Conectado ao banco de dados SQLite (sace.db).');
 });
 
-// Criação das tabelas reais
+// 3. Criação das tabelas reais
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS equipe (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,7 +40,11 @@ db.serialize(() => {
     )`);
 });
 
-// Rotas da API REST
+// 4. Rotas da API e Rota Principal
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.get('/api/equipe', (req, res) => {
     db.all("SELECT * FROM equipe", [], (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -70,29 +70,8 @@ app.delete('/api/equipe/:id', (req, res) => {
     });
 });
 
-app.get('/api/propostas', (req, res) => {
-    db.all("SELECT * FROM propostas", [], (err, rows) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json(rows);
-    });
-});
-
-app.post('/api/propostas', (req, res) => {
-    const { cliente_nome, imovel_descricao, valor_total } = req.body;
-    db.run(`INSERT INTO propostas (cliente_nome, imovel_descricao, valor_total) VALUES (?, ?, ?)`,
-        [cliente_nome, imovel_descricao, valor_total],
-        function(err) {
-            if (err) return res.status(500).json({ error: err.message });
-            res.json({ id: this.lastID, status: 'Pendente' });
-        }
-    );
-});
-
-// Rota para servir o HTML principal
-app.get('/', (req, res) => {
-    res.send('Servidor SACE rodando com sucesso! Acesse o seu arquivo HTML principal.');
-});
-
+// Inicializa o Servidor
 app.listen(PORT, () => {
     console.log(`🚀 SACE Rodando ativado na porta :${PORT}`);
+    console.log(`🔒 Operação regulada pela Master Brasília - CEO: Antonio C Santos`);
 });
