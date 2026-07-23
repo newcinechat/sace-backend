@@ -97,7 +97,7 @@
             <div class="flex items-center space-x-3">
                 <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (PEDE SENHA) -->
                 <button onclick="solicitarSenhaMaster()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
-                    <span>🎥 Reunião Master Brasília</span>
+                    <span>🎥 Sala Suprema 60 Slots</span>
                 </button>
                 <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
                     Sair / Lock
@@ -169,7 +169,7 @@
                         </div>
                     </section>
 
-                    <!-- 2. Diagnóstico de Riscos & Saneamento (Com limpeza funcional corrigida) -->
+                    <!-- 2. Diagnóstico de Riscos & Saneamento -->
                     <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-sm font-bold text-white uppercase tracking-wider">🔍 2. Diagnóstico de Riscos & Saneamento</h2>
@@ -382,90 +382,71 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TELA CHEIA / MODAL OCULTO: SALA MASTER     -->
+    <!-- SALA DE MONITORAMENTO SUPREMA — 60 SLOTS   -->
     <!-- ========================================== -->
-    <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-saceDark flex flex-col">
-        <header class="bg-saceCard border-b border-amber-500/40 px-6 py-4 flex justify-between items-center z-20">
+    <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-[#07090f] flex flex-col overflow-hidden">
+        
+        <!-- HEADER DO PAINEL SUPREMO -->
+        <header class="bg-[#0b0f19] border-b border-saceBorder px-6 py-3 flex justify-between items-center z-20 shrink-0">
             <div class="flex items-center space-x-3">
-                <span class="bg-amber-500/20 text-amber-400 text-xs font-black px-3 py-1.5 rounded border border-amber-500/40 uppercase tracking-widest animate-pulse">🎥 SALA MASTER BRASÍLIA — TRANSMISSÃO GLOBAL</span>
-                <span class="text-xs text-gray-400 hidden sm:inline">Governança Unificada • Filiais DF & GO • Entrevistas de Cargos SACE</span>
+                <span class="text-pink-500 font-black tracking-widest text-sm uppercase flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
+                    <span>👁️ SALA DE MONITORAMENTO SUPREMA — 60 SLOTS</span>
+                </span>
             </div>
-            <div class="flex items-center space-x-3">
-                <!-- Botão para adicionar nova tela interativa na sala -->
-                <button onclick="adicionarMiniTela()" class="bg-saceDark hover:bg-gray-800 text-amber-400 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all">
-                    + Adicionar Tela
-                </button>
-                <button onclick="fecharSalaMasterModal()" class="bg-amber-500 hover:bg-amber-600 text-saceDark px-5 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all shadow-lg flex items-center space-x-2">
-                    <span>← Voltar ao Painel Operacional</span>
+            <div>
+                <button onclick="fecharSalaMasterModal()" class="bg-pink-600 hover:bg-pink-700 text-white px-5 py-1.5 rounded text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-pink-600/30">
+                    FECHAR ✕
                 </button>
             </div>
         </header>
 
-        <!-- Grade Dinâmica Otimizada com Telas Reduzidas, Mute e Cancelar -->
-        <div id="gradeSalasMaster" class="flex-1 p-4 md:p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#07090f]">
+        <!-- CORPO DO MONITORAMENTO COM 3 COLUNAS (Esquerda: 1 a 30, Centro: Monitor Principal, Direita: 31 a 60) -->
+        <div class="flex-1 flex overflow-hidden p-4 gap-4">
             
-            <!-- Mini Tela 1: Filial Entorno GO -->
-            <div id="tela-go" class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg">
-                <div class="flex justify-between items-center z-10 mb-2">
-                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold">Filial Entorno GO</span>
-                    <div class="flex space-x-1">
-                        <button onclick="toggleMute('tela-go')" id="btn-mute-tela-go" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
-                        <button onclick="removerMiniTela('tela-go')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
-                    </div>
-                </div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">🏢</span>
-                    <span id="status-mute-tela-go" class="absolute top-1 right-2 text-[10px] text-emerald-400 font-bold">Ao Vivo</span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Valparaíso/GO (Gestor)</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
+            <!-- COLUNA ESQUERDA: SLOTS 1 a 30 (Com Scroll) -->
+            <div class="w-72 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+                <div id="colunaSlotsEsquerda" class="space-y-2">
+                    <!-- Gerado via Script -->
                 </div>
             </div>
 
-            <!-- TELA MASTER CENTRAL -->
-            <div class="bg-saceCard border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl bg-gradient-to-b from-saceCard to-saceDark">
-                <div class="absolute top-3 left-3 bg-amber-500 text-saceDark px-2.5 py-0.5 rounded text-xs font-black z-10 uppercase tracking-wider">
-                    ★ TELA MASTER SACE BRASÍLIA (CEO ACSantos)
-                </div>
-                <div class="absolute top-3 right-3 bg-red-600/90 text-white px-2.5 py-0.5 rounded text-[10px] font-bold z-10 flex items-center space-x-1.5 animate-pulse">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                    <span>GRAVAÇÃO ATIVA</span>
-                </div>
+            <!-- COLUNA CENTRAL: TELA DE TRANSMISSÃO FOCADA -->
+            <div class="flex-1 bg-[#111827] border-2 border-cyan-400/50 rounded-2xl flex flex-col justify-between p-6 relative shadow-2xl overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-cyan-950/10 via-transparent to-pink-950/10 pointer-events-none"></div>
                 
-                <div class="flex-1 bg-saceDark/90 rounded-xl my-8 flex flex-col items-center justify-center border border-amber-500/30 relative">
-                    <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-2xl font-black mb-2 shadow-lg">
-                        SACE
+                <div class="flex justify-between items-center z-10">
+                    <span id="labelSlotAtivo" class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950/60 px-3 py-1 rounded border border-cyan-800/50">Nenhum slot selecionado</span>
+                    <div class="flex space-x-2">
+                        <button onclick="mutarSlotAtivo()" id="btnMuteAtivo" class="bg-saceDark hover:bg-gray-800 text-gray-300 text-xs px-3 py-1 rounded border border-saceBorder font-semibold">Mutar Slot</button>
+                        <button onclick="desconectarSlotAtivo()" class="bg-red-900/60 hover:bg-red-800 text-red-200 text-xs px-3 py-1 rounded border border-red-700 font-semibold">Desconectar</button>
                     </div>
-                    <h3 class="text-sm font-bold text-white">Comando Executivo Nacional & Validação</h3>
-                    <p class="text-[11px] text-gray-400 text-center max-w-sm mt-1">Painel centralizado de deliberação para filiais do Distrito Federal e Goiás.</p>
                 </div>
 
-                <div class="flex justify-between items-center text-xs pt-2 border-t border-saceBorder">
-                    <span class="text-gray-400">Status: <strong class="text-emerald-400">Seguro</strong></span>
-                    <div class="flex space-x-2">
-                        <button onclick="alert('Áudio principal master alternado.')" class="bg-saceDark hover:bg-gray-700 text-gray-200 px-3 py-1.5 rounded border border-saceBorder font-bold">🎙️ Mutar Master</button>
-                        <button onclick="alert('Ata e gravação salvas com sucesso.')" class="bg-amber-600 hover:bg-amber-700 text-saceDark px-3 py-1.5 rounded font-black uppercase">💾 Salvar Ata</button>
+                <div class="flex-1 my-6 flex flex-col items-center justify-center relative z-10">
+                    <div class="w-full max-w-2xl h-80 bg-gradient-to-tr from-pink-600 via-purple-600 to-indigo-600 rounded-2xl flex flex-col items-center justify-center shadow-2xl border border-pink-400/30 p-8 text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-16 h-16 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto text-3xl shadow-inner">
+                                📺
+                            </div>
+                            <div>
+                                <h3 id="tituloTelaFocada" class="text-lg font-black text-white uppercase tracking-wider">SINAL DE TRANSMISSÃO FOCADA</h3>
+                                <p id="subTelaFocada" class="text-xs text-pink-100 mt-1">Selecione um slot ativo na barra lateral para interceptar a live do mentor ou filial.</p>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div class="text-center text-[11px] text-gray-500 uppercase tracking-widest z-10 pt-2 border-t border-saceBorder">
+                    Asgard Mainframe Security Core Active • 60 Canais Simultâneos
                 </div>
             </div>
 
-            <!-- Mini Tela 2: Processo Seletivo DF -->
-            <div id="tela-sel" class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg">
-                <div class="flex justify-between items-center z-10 mb-2">
-                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-purple-400 font-bold">Processo Seletivo SACE</span>
-                    <div class="flex space-x-1">
-                        <button onclick="toggleMute('tela-sel')" id="btn-mute-tela-sel" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
-                        <button onclick="removerMiniTela('tela-sel')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
-                    </div>
-                </div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">👤</span>
-                    <span id="status-mute-tela-sel" class="absolute top-1 right-2 text-[10px] text-amber-400 font-bold">Ao Vivo</span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Candidato a Advogado Sênior</span>
-                    <span class="text-amber-400 font-bold">Arguição</span>
+            <!-- COLUNA DIREITA: SLOTS 31 a 60 (Com Scroll) -->
+            <div class="w-72 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+                <div id="colunaSlotsDireita" class="space-y-2">
+                    <!-- Gerado via Script -->
                 </div>
             </div>
 
@@ -477,7 +458,7 @@
         <div class="bg-saceCard border border-amber-500/50 rounded-xl p-6 w-full max-w-sm shadow-2xl space-y-4 text-center">
             <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto text-amber-400 text-xl font-bold">🔒</div>
             <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acesso Restrito Master</h3>
-            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Reunião Master Brasília.</p>
+            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Sala de Monitoramento Suprema.</p>
             <input type="password" id="inputSenhaMaster" placeholder="Senha Master" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-center text-white text-sm focus:outline-none focus:border-amber-500">
             <div class="flex space-x-2 pt-2">
                 <button onclick="fecharSenhaMaster()" class="flex-1 bg-saceBorder hover:bg-gray-700 text-gray-300 py-2 rounded text-xs font-bold">Cancelar</button>
@@ -558,10 +539,91 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CONTROLE E NAVEGAÇÃO DA SALA MASTER -->
+    <!-- SCRIPT DE CONTROLE E GERENCIAMENTO DOS 60 SLOTS -->
     <script>
         let tipoParceiroAtual = 'Advogado';
-        let contadorTelas = 3;
+        let slotSelecionadoAtual = null;
+
+        // Gerar os 60 slots automaticamente nas colunas laterais
+        window.addEventListener('DOMContentLoaded', () => {
+            const containerEsquerda = document.getElementById('colunaSlotsEsquerda');
+            const containerDireita = document.getElementById('colunaSlotsDireita');
+
+            // Slots 1 a 30 (Esquerda)
+            for(let i = 1; i <= 30; i++) {
+                const div = document.createElement('div');
+                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2 cursor-pointer transition-all flex justify-between items-center';
+                div.id = `slot-${i}`;
+                div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
+                div.innerHTML = `
+                    <div>
+                        <div class="text-[11px] font-bold text-gray-200">Slot ${i}</div>
+                        <div class="text-[9px] text-gray-500 uppercase" id="status-slot-${i}">OFFLINE</div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-gray-600" id="indicator-slot-${i}"></span>
+                `;
+                containerEsquerda.appendChild(div);
+            }
+
+            // Slots 31 a 60 (Direita)
+            for(let i = 31; i <= 60; i++) {
+                const div = document.createElement('div');
+                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2 cursor-pointer transition-all flex justify-between items-center';
+                div.id = `slot-${i}`;
+                div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
+                div.innerHTML = `
+                    <div>
+                        <div class="text-[11px] font-bold text-gray-200">Slot ${i}</div>
+                        <div class="text-[9px] text-gray-500 uppercase" id="status-slot-${i}">OFFLINE</div>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-gray-600" id="indicator-slot-${i}"></span>
+                `;
+                containerDireita.appendChild(div);
+            }
+
+            // Ativar alguns slots de exemplo para simulação realista
+            ativarSlotExemplo(1, 'Matriz Brasília/DF (CEO)');
+            ativarSlotExemplo(2, 'Filial Entorno GO');
+            ativarSlotExemplo(5, 'Processo Seletivo SACE');
+        });
+
+        function ativarSlotExemplo(num, nome) {
+            const statusEl = document.getElementById(`status-slot-${num}`);
+            const indEl = document.getElementById(`indicator-slot-${num}`);
+            if(statusEl && indEl) {
+                statusEl.innerText = nome;
+                statusEl.className = 'text-[9px] text-emerald-400 font-bold';
+                indEl.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+            }
+        }
+
+        function selecionarSlot(num, nome) {
+            slotSelecionadoAtual = num;
+            document.getElementById('labelSlotAtivo').innerText = `SLOT ${num} ATIVO — INTERCEPTANDO`;
+            document.getElementById('tituloTelaFocada').innerText = `TRANSMISSÃO AO VIVO: ${nome}`;
+            document.getElementById('subTelaFocada').innerText = `Canal conectado em tempo real com o servidor SACE Master.`;
+        }
+
+        function mutarSlotAtivo() {
+            if(!slotSelecionadoAtual) {
+                alert('Selecione um slot na lateral primeiro.');
+                return;
+            }
+            alert(`Áudio do Slot ${slotSelecionadoAtual} alternado.`);
+        }
+
+        function desconectarSlotAtivo() {
+            if(!slotSelecionadoAtual) {
+                alert('Selecione um slot na lateral primeiro.');
+                return;
+            }
+            const statusEl = document.getElementById(`status-slot-${slotSelecionadoAtual}`);
+            const indEl = document.getElementById(`indicator-slot-${slotSelecionadoAtual}`);
+            statusEl.innerText = 'OFFLINE';
+            statusEl.className = 'text-[9px] text-gray-500 uppercase';
+            indEl.className = 'w-2 h-2 rounded-full bg-gray-600';
+            alert(`Slot ${slotSelecionadoAtual} desconectado.`);
+        }
 
         function fazerLogin() {
             const user = document.getElementById('userInput').value;
@@ -605,59 +667,6 @@
         function limparDiagnostico() {
             const tbody = document.getElementById('tabelaDiagnostico');
             tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-500 font-medium">Nenhum risco pendente. Diagnóstico limpo com sucesso!</td></tr>`;
-        }
-
-        function toggleMute(id) {
-            const statusEl = document.getElementById('status-mute-' + id);
-            const btnEl = document.getElementById('btn-mute-' + id);
-            if(statusEl.innerText === 'Ao Vivo') {
-                statusEl.innerText = 'Mutado';
-                statusEl.className = 'absolute top-1 right-2 text-[10px] text-red-400 font-bold';
-                btnEl.innerText = 'Desmutar';
-                btnEl.className = 'bg-amber-900/60 text-amber-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-amber-700';
-            } else {
-                statusEl.innerText = 'Ao Vivo';
-                statusEl.className = 'absolute top-1 right-2 text-[10px] text-emerald-400 font-bold';
-                btnEl.innerText = 'Mutar';
-                btnEl.className = 'bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder';
-            }
-        }
-
-        function removerMiniTela(id) {
-            const el = document.getElementById(id);
-            if(el) {
-                el.remove();
-                alert('Transmissão encerrada e tela removida.');
-            }
-        }
-
-        function adicionarMiniTela() {
-            contadorTelas++;
-            const idTela = 'tela-nova-' + contadorTelas;
-            const grade = document.getElementById('gradeSalasMaster');
-            
-            const novaDiv = document.createElement('div');
-            novaDiv.id = idTela;
-            novaDiv.className = 'bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg';
-            novaDiv.innerHTML = `
-                <div class="flex justify-between items-center z-10 mb-2">
-                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-bold">Filial Conectada #${contadorTelas}</span>
-                    <div class="flex space-x-1">
-                        <button onclick="toggleMute('${idTela}')" id="btn-mute-${idTela}" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
-                        <button onclick="removerMiniTela('${idTela}')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
-                    </div>
-                </div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">🌐</span>
-                    <span id="status-mute-${idTela}" class="absolute top-1 right-2 text-[10px] text-emerald-400 font-bold">Ao Vivo</span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Nova Filial / Polo SACE</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
-                </div>
-            `;
-            grade.appendChild(novaDiv);
-            alert('Nova tela de transmissão adicionada com sucesso!');
         }
 
         function toggleComercial() {
