@@ -8,6 +8,13 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+// Configura para servir arquivos estáticos (como o index.html)
+app.use(express.static(__dirname));
+
+// Rota principal para abrir a interface visual
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // Inicializa banco de dados SQLite local
 const db = new sqlite3.Database('./sace.db', (err) => {
