@@ -95,8 +95,8 @@
             </div>
             
             <div class="flex items-center space-x-3">
-                <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (ABRE A TELA CHEIA) -->
-                <button onclick="abrirSalaMasterModal()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
+                <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (PEDE SENHA) -->
+                <button onclick="solicitarSenhaMaster()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
                     <span>🎥 Reunião Master Brasília</span>
                 </button>
                 <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
@@ -106,37 +106,6 @@
         </header>
 
         <main class="max-w-7xl mx-auto p-6 space-y-6">
-
-            <!-- MANIFESTO OFICIAL -->
-            <section class="bg-gradient-to-r from-saceCard via-saceDark to-saceCard border border-amber-500/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 select-none pointer-events-none">🏛️</div>
-                <div class="flex justify-between items-center mb-4 border-b border-saceBorder pb-3">
-                    <div class="flex items-center space-x-3">
-                        <span class="bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Inovação Master SACE Brasília</span>
-                        <span class="text-xs text-gray-400">Julho de 2026 • Manifesto Oficial</span>
-                    </div>
-                    <button onclick="toggleManifesto()" id="btnToggleManifesto" class="text-xs text-amber-400 hover:underline font-semibold">Recolher ▲</button>
-                </div>
-                <div id="conteudoManifesto" class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p class="font-medium text-white">
-                        Imagine um homem que não sabe nada de programação, nada de linhas de códigos, nada de Python ou Node. E agora com mais de 40 anos de idade, do nada, do absoluto zero, com a ajuda de uma IA (Gemini), construir o que chamo de obra-prima: o primeiro <strong class="text-amber-400">SACE — Sistema Auditado de Conformidade Extrajudicial</strong>.
-                    </p>
-                    <p>
-                        Tudo isso criado com paciência e perseverança. Chegamos longe, onde a escala vai se expandir e atravessar fronteiras de norte a sul, de leste a oeste. Empregos, sociedades, parceiros e locatários serão ligados a essa teia tecnológica chamada <strong class="text-white">INOVAÇÃO MASTER SACE BRASÍLIA</strong>.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-saceBorder/60 text-xs">
-                        <div class="bg-saceDark/60 p-3 rounded-lg border border-saceBorder">
-                            <span class="text-amber-500 font-bold uppercase block mb-1">🎯 A Concepção</span>
-                            <p class="text-gray-400">Desenvolvido sob rigorosa curadoria estratégica de arquitetura de dados e conformidade jurídica extrajudicial por ACSantos.</p>
-                        </div>
-                        <div class="bg-saceDark/60 p-3 rounded-lg border border-saceBorder">
-                            <span class="text-amber-500 font-bold uppercase block mb-1">🚀 Expansão de Rede Nacional</span>
-                            <p class="text-gray-400">Conectando polos, filiais e comarcas de ponta a ponta com segurança institucional absoluta.</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-right text-gray-500 italic pt-2">CEO e Fundador: ACSantos | Brasília, Distrito Federal</p>
-                </div>
-            </section>
             
             <!-- TOPO: MÓDULOS DE SUPORTE -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -200,11 +169,11 @@
                         </div>
                     </section>
 
-                    <!-- 2. Diagnóstico de Riscos & Saneamento -->
+                    <!-- 2. Diagnóstico de Riscos & Saneamento (Com limpeza funcional corrigida) -->
                     <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
                             <h2 class="text-sm font-bold text-white uppercase tracking-wider">🔍 2. Diagnóstico de Riscos & Saneamento</h2>
-                            <button onclick="alert('Diagnóstico limpo com sucesso.')" class="text-xs text-red-400 hover:underline">Limpar Tudo</button>
+                            <button onclick="limparDiagnostico()" class="text-xs text-red-400 hover:underline">Limpar Tudo</button>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs">
@@ -215,7 +184,7 @@
                                         <th class="p-3">Diagnóstico Algorítmico</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-saceBorder/50">
+                                <tbody id="tabelaDiagnostico" class="divide-y divide-saceBorder/50">
                                     <tr>
                                         <td class="p-3 text-gray-200">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
                                         <td class="p-3"><span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold">Crítico</span></td>
@@ -371,7 +340,7 @@
             </div>
 
             <!-- ========================================== -->
-            <!-- MASTER FILIAIS: GESTÃO INTEGRADA AO SQLITE -->
+            <!-- MASTER FILIAIS: GESTÃO INTEGRADA           -->
             <!-- ========================================== -->
             <section id="secaoMasterFiliais" class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
                 <div class="flex justify-between items-center mb-4">
@@ -413,30 +382,40 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- TELA CHEIA / MODAL OCULTO: SALA MASTER BRASÍLIA -->
+    <!-- TELA CHEIA / MODAL OCULTO: SALA MASTER     -->
     <!-- ========================================== -->
     <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-saceDark flex flex-col">
-        <!-- Barra de Topo da Sala Master -->
         <header class="bg-saceCard border-b border-amber-500/40 px-6 py-4 flex justify-between items-center z-20">
             <div class="flex items-center space-x-3">
                 <span class="bg-amber-500/20 text-amber-400 text-xs font-black px-3 py-1.5 rounded border border-amber-500/40 uppercase tracking-widest animate-pulse">🎥 SALA MASTER BRASÍLIA — TRANSMISSÃO GLOBAL</span>
                 <span class="text-xs text-gray-400 hidden sm:inline">Governança Unificada • Filiais DF & GO • Entrevistas de Cargos SACE</span>
             </div>
-            <!-- Botão de Clique e Volta exigido pelo Gênio -->
-            <button onclick="fecharSalaMasterModal()" class="bg-amber-500 hover:bg-amber-600 text-saceDark px-5 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all shadow-lg flex items-center space-x-2">
-                <span>← Voltar ao Painel Operacional</span>
-            </button>
+            <div class="flex items-center space-x-3">
+                <!-- Botão para adicionar nova tela interativa na sala -->
+                <button onclick="adicionarMiniTela()" class="bg-saceDark hover:bg-gray-800 text-amber-400 border border-amber-500/40 px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all">
+                    + Adicionar Tela
+                </button>
+                <button onclick="fecharSalaMasterModal()" class="bg-amber-500 hover:bg-amber-600 text-saceDark px-5 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all shadow-lg flex items-center space-x-2">
+                    <span>← Voltar ao Painel Operacional</span>
+                </button>
+            </div>
         </header>
 
-        <!-- Grade de Vídeo Central e Filiais ao Redor (Acima, Abaixo, Direita, Esquerda) -->
-        <div class="flex-1 p-4 md:p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 bg-[#07090f]">
+        <!-- Grade Dinâmica Otimizada com Telas Reduzidas, Mute e Cancelar -->
+        <div id="gradeSalasMaster" class="flex-1 p-4 md:p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-4 bg-[#07090f]">
             
-            <!-- TOPO (Mini tela 1: Filial Entorno GO) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Entorno GO</div>
+            <!-- Mini Tela 1: Filial Entorno GO -->
+            <div id="tela-go" class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg">
+                <div class="flex justify-between items-center z-10 mb-2">
+                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold">Filial Entorno GO</span>
+                    <div class="flex space-x-1">
+                        <button onclick="toggleMute('tela-go')" id="btn-mute-tela-go" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
+                        <button onclick="removerMiniTela('tela-go')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
+                    </div>
+                </div>
                 <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
                     <span class="text-2xl">🏢</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span id="status-mute-tela-go" class="absolute top-1 right-2 text-[10px] text-emerald-400 font-bold">Ao Vivo</span>
                 </div>
                 <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
                     <span class="truncate font-semibold">Valparaíso/GO (Gestor)</span>
@@ -444,124 +423,66 @@
                 </div>
             </div>
 
-            <!-- CENTRO SUPERIOR (Mini tela 2: Entrevista / Candidato Vaga) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-2">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-purple-400 font-bold z-10">Processo Seletivo SACE</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">👤</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Candidato a Advogado Sênior (Entrevista)</span>
-                    <span class="text-amber-400 font-bold">Em Arguição</span>
-                </div>
-            </div>
-
-            <!-- TOPO DIREITA (Mini tela 3: Filial Norte) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Sobradinho DF</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">🏛️</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Sobradinho/DF (Operação)</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
-                </div>
-            </div>
-
-            <!-- ESQUERDA (Mini tela 4: Filial Paranoá) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1 md:row-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Paranoá DF</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">📍</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Paranoá/DF (REURB)</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
-                </div>
-            </div>
-
-            <!-- TELA MASTER CENTRAL (Grande Painel em Destaque) -->
-            <div class="bg-saceCard border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl md:col-span-2 md:row-span-1 bg-gradient-to-b from-saceCard to-saceDark">
+            <!-- TELA MASTER CENTRAL -->
+            <div class="bg-saceCard border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl bg-gradient-to-b from-saceCard to-saceDark">
                 <div class="absolute top-3 left-3 bg-amber-500 text-saceDark px-2.5 py-0.5 rounded text-xs font-black z-10 uppercase tracking-wider">
                     ★ TELA MASTER SACE BRASÍLIA (CEO ACSantos)
                 </div>
                 <div class="absolute top-3 right-3 bg-red-600/90 text-white px-2.5 py-0.5 rounded text-[10px] font-bold z-10 flex items-center space-x-1.5 animate-pulse">
                     <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                    <span>GRAVAÇÃO INSTITUCIONAL ATIVA</span>
+                    <span>GRAVAÇÃO ATIVA</span>
                 </div>
                 
                 <div class="flex-1 bg-saceDark/90 rounded-xl my-8 flex flex-col items-center justify-center border border-amber-500/30 relative">
                     <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-2xl font-black mb-2 shadow-lg">
                         SACE
                     </div>
-                    <h3 class="text-sm font-bold text-white">Comando Executivo Nacional & Validação de Minutas</h3>
-                    <p class="text-[11px] text-gray-400 text-center max-w-sm mt-1">Painel centralizado de deliberação para filiais do Distrito Federal e Estado de Goiás.</p>
+                    <h3 class="text-sm font-bold text-white">Comando Executivo Nacional & Validação</h3>
+                    <p class="text-[11px] text-gray-400 text-center max-w-sm mt-1">Painel centralizado de deliberação para filiais do Distrito Federal e Goiás.</p>
                 </div>
 
                 <div class="flex justify-between items-center text-xs pt-2 border-t border-saceBorder">
-                    <span class="text-gray-400">Status de Rede: <strong class="text-emerald-400">100% Criptografado</strong></span>
+                    <span class="text-gray-400">Status: <strong class="text-emerald-400">Seguro</strong></span>
                     <div class="flex space-x-2">
-                        <button onclick="alert('Áudio principal alternado.')" class="bg-saceDark hover:bg-gray-700 text-gray-200 px-3 py-1.5 rounded border border-saceBorder font-bold">🎙️ Mutar</button>
-                        <button onclick="alert('Ata e gravação da Sessão Master gravadas no banco de dados com sucesso.')" class="bg-amber-600 hover:bg-amber-700 text-saceDark px-3 py-1.5 rounded font-black uppercase">💾 Salvar Ata</button>
+                        <button onclick="alert('Áudio principal master alternado.')" class="bg-saceDark hover:bg-gray-700 text-gray-200 px-3 py-1.5 rounded border border-saceBorder font-bold">🎙️ Mutar Master</button>
+                        <button onclick="alert('Ata e gravação salvas com sucesso.')" class="bg-amber-600 hover:bg-amber-700 text-saceDark px-3 py-1.5 rounded font-black uppercase">💾 Salvar Ata</button>
                     </div>
                 </div>
             </div>
 
-            <!-- DIREITA (Mini tela 5: Topografia Parceira) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1 md:row-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Parceiro Topografia</div>
+            <!-- Mini Tela 2: Processo Seletivo DF -->
+            <div id="tela-sel" class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg">
+                <div class="flex justify-between items-center z-10 mb-2">
+                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-purple-400 font-bold">Processo Seletivo SACE</span>
+                    <div class="flex space-x-1">
+                        <button onclick="toggleMute('tela-sel')" id="btn-mute-tela-sel" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
+                        <button onclick="removerMiniTela('tela-sel')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
+                    </div>
+                </div>
                 <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">📐</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="text-2xl">👤</span>
+                    <span id="status-mute-tela-sel" class="absolute top-1 right-2 text-[10px] text-amber-400 font-bold">Ao Vivo</span>
                 </div>
                 <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Equipe RTK & Geodésia</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
+                    <span class="truncate font-semibold">Candidato a Advogado Sênior</span>
+                    <span class="text-amber-400 font-bold">Arguição</span>
                 </div>
             </div>
 
-            <!-- BAIXO ESQUERDA (Mini tela 6: Jurídico Matriz) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Núcleo Jurídico</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">⚖️</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Advocacia Extrajudicial</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <!-- BAIXO CENTRO (Mini tela 7: Contabilidade SACE) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-2">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Contabilidade & Splits</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">📊</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Auditoria Contábil e Repasses (DF/GO)</span>
-                    <span class="text-emerald-400 font-bold">Online</span>
-                </div>
+    <!-- MODAL DE SENHA MASTER -->
+    <div id="modalSenhaMaster" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-saceCard border border-amber-500/50 rounded-xl p-6 w-full max-w-sm shadow-2xl space-y-4 text-center">
+            <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto text-amber-400 text-xl font-bold">🔒</div>
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acesso Restrito Master</h3>
+            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Reunião Master Brasília.</p>
+            <input type="password" id="inputSenhaMaster" placeholder="Senha Master" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-center text-white text-sm focus:outline-none focus:border-amber-500">
+            <div class="flex space-x-2 pt-2">
+                <button onclick="fecharSenhaMaster()" class="flex-1 bg-saceBorder hover:bg-gray-700 text-gray-300 py-2 rounded text-xs font-bold">Cancelar</button>
+                <button onclick="validarSenhaMaster()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-saceDark py-2 rounded text-xs font-black uppercase">Entrar</button>
             </div>
-
-            <!-- BAIXO DIREITA (Mini tela 8: Expansão Nacional) -->
-            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
-                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Futuras Filiais</div>
-                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
-                    <span class="text-2xl">🌐</span>
-                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-gray-500"></span>
-                </div>
-                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
-                    <span class="truncate font-semibold">Expansão Regional</span>
-                    <span class="text-gray-400 font-bold">Standby</span>
-                </div>
-            </div>
-
         </div>
     </div>
 
@@ -640,6 +561,7 @@
     <!-- SCRIPT DE CONTROLE E NAVEGAÇÃO DA SALA MASTER -->
     <script>
         let tipoParceiroAtual = 'Advogado';
+        let contadorTelas = 3;
 
         function fazerLogin() {
             const user = document.getElementById('userInput').value;
@@ -657,19 +579,85 @@
             document.getElementById('loginScreen').classList.remove('hidden');
         }
 
-        function abrirSalaMasterModal() {
-            document.getElementById('salaMasterModal').classList.remove('hidden');
+        function solicitarSenhaMaster() {
+            document.getElementById('modalSenhaMaster').classList.remove('hidden');
+            document.getElementById('inputSenhaMaster').value = '';
+        }
+
+        function fecharSenhaMaster() {
+            document.getElementById('modalSenhaMaster').classList.add('hidden');
+        }
+
+        function validarSenhaMaster() {
+            const senha = document.getElementById('inputSenhaMaster').value;
+            if(senha === 'sace26' || senha === 'master' || senha === '1234') {
+                fecharSenhaMaster();
+                document.getElementById('salaMasterModal').classList.remove('hidden');
+            } else {
+                alert('Senha Master incorreta. Acesso negado.');
+            }
         }
 
         function fecharSalaMasterModal() {
             document.getElementById('salaMasterModal').classList.add('hidden');
         }
 
-        function toggleManifesto() {
-            const conteudo = document.getElementById('conteudoManifesto');
-            const btn = document.getElementById('btnToggleManifesto');
-            conteudo.classList.toggle('hidden');
-            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+        function limparDiagnostico() {
+            const tbody = document.getElementById('tabelaDiagnostico');
+            tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-500 font-medium">Nenhum risco pendente. Diagnóstico limpo com sucesso!</td></tr>`;
+        }
+
+        function toggleMute(id) {
+            const statusEl = document.getElementById('status-mute-' + id);
+            const btnEl = document.getElementById('btn-mute-' + id);
+            if(statusEl.innerText === 'Ao Vivo') {
+                statusEl.innerText = 'Mutado';
+                statusEl.className = 'absolute top-1 right-2 text-[10px] text-red-400 font-bold';
+                btnEl.innerText = 'Desmutar';
+                btnEl.className = 'bg-amber-900/60 text-amber-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-amber-700';
+            } else {
+                statusEl.innerText = 'Ao Vivo';
+                statusEl.className = 'absolute top-1 right-2 text-[10px] text-emerald-400 font-bold';
+                btnEl.innerText = 'Mutar';
+                btnEl.className = 'bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder';
+            }
+        }
+
+        function removerMiniTela(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.remove();
+                alert('Transmissão encerrada e tela removida.');
+            }
+        }
+
+        function adicionarMiniTela() {
+            contadorTelas++;
+            const idTela = 'tela-nova-' + contadorTelas;
+            const grade = document.getElementById('gradeSalasMaster');
+            
+            const novaDiv = document.createElement('div');
+            novaDiv.id = idTela;
+            novaDiv.className = 'bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg';
+            novaDiv.innerHTML = `
+                <div class="flex justify-between items-center z-10 mb-2">
+                    <span class="bg-black/60 px-2 py-0.5 rounded text-[10px] text-emerald-400 font-bold">Filial Conectada #${contadorTelas}</span>
+                    <div class="flex space-x-1">
+                        <button onclick="toggleMute('${idTela}')" id="btn-mute-${idTela}" class="bg-saceDark text-gray-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-saceBorder">Mutar</button>
+                        <button onclick="removerMiniTela('${idTela}')" class="bg-red-900/60 text-red-300 hover:text-white px-2 py-0.5 rounded text-[10px] border border-red-700">✕</button>
+                    </div>
+                </div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">🌐</span>
+                    <span id="status-mute-${idTela}" class="absolute top-1 right-2 text-[10px] text-emerald-400 font-bold">Ao Vivo</span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Nova Filial / Polo SACE</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            `;
+            grade.appendChild(novaDiv);
+            alert('Nova tela de transmissão adicionada com sucesso!');
         }
 
         function toggleComercial() {
