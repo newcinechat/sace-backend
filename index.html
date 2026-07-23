@@ -24,10 +24,9 @@
 <body class="bg-saceDark text-gray-100 font-sans antialiased min-h-screen selection:bg-amber-500 selection:text-black">
 
     <!-- ========================================== -->
-    <!-- TELA DE LOGIN CORPORATIVA (ESTILO ORIGINAL) -->
+    <!-- TELA DE LOGIN CORPORATIVA                  -->
     <!-- ========================================== -->
     <div id="loginScreen" class="fixed inset-0 z-50 flex bg-saceDark">
-        <!-- Coluna Esquerda: Formulário -->
         <div class="w-full lg:w-5/12 p-8 lg:p-16 flex flex-col justify-between border-r border-saceBorder bg-saceDark z-10">
             <div>
                 <div class="flex items-center space-x-3 mb-12">
@@ -69,7 +68,6 @@
             </div>
         </div>
 
-        <!-- Coluna Direita: Imagem de Fundo Corporativa -->
         <div class="hidden lg:flex lg:w-7/12 relative overflow-hidden items-end p-16">
             <div class="absolute inset-0 bg-gradient-to-t from-saceDark via-saceDark/40 to-transparent z-10"></div>
             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity filter contrast-125">
@@ -82,7 +80,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- PAINEL OPERACIONAL PRINCIPAL COMPLETO     -->
+    <!-- PAINEL OPERACIONAL PRINCIPAL               -->
     <!-- ========================================== -->
     <div id="appContainer" class="hidden">
         <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
@@ -95,12 +93,50 @@
                     <p class="text-xs text-gray-400">Painel Operacional Avançado | Arquiteto Master: Gênio (ACSantos)</p>
                 </div>
             </div>
-            <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
-                Sair / Lock
-            </button>
+            
+            <div class="flex items-center space-x-3">
+                <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (ABRE A TELA CHEIA) -->
+                <button onclick="abrirSalaMasterModal()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
+                    <span>🎥 Reunião Master Brasília</span>
+                </button>
+                <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
+                    Sair / Lock
+                </button>
+            </div>
         </header>
 
         <main class="max-w-7xl mx-auto p-6 space-y-6">
+
+            <!-- MANIFESTO OFICIAL -->
+            <section class="bg-gradient-to-r from-saceCard via-saceDark to-saceCard border border-amber-500/30 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 text-9xl opacity-5 select-none pointer-events-none">🏛️</div>
+                <div class="flex justify-between items-center mb-4 border-b border-saceBorder pb-3">
+                    <div class="flex items-center space-x-3">
+                        <span class="bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Inovação Master SACE Brasília</span>
+                        <span class="text-xs text-gray-400">Julho de 2026 • Manifesto Oficial</span>
+                    </div>
+                    <button onclick="toggleManifesto()" id="btnToggleManifesto" class="text-xs text-amber-400 hover:underline font-semibold">Recolher ▲</button>
+                </div>
+                <div id="conteudoManifesto" class="space-y-4 text-sm text-gray-300 leading-relaxed">
+                    <p class="font-medium text-white">
+                        Imagine um homem que não sabe nada de programação, nada de linhas de códigos, nada de Python ou Node. E agora com mais de 40 anos de idade, do nada, do absoluto zero, com a ajuda de uma IA (Gemini), construir o que chamo de obra-prima: o primeiro <strong class="text-amber-400">SACE — Sistema Auditado de Conformidade Extrajudicial</strong>.
+                    </p>
+                    <p>
+                        Tudo isso criado com paciência e perseverança. Chegamos longe, onde a escala vai se expandir e atravessar fronteiras de norte a sul, de leste a oeste. Empregos, sociedades, parceiros e locatários serão ligados a essa teia tecnológica chamada <strong class="text-white">INOVAÇÃO MASTER SACE BRASÍLIA</strong>.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-saceBorder/60 text-xs">
+                        <div class="bg-saceDark/60 p-3 rounded-lg border border-saceBorder">
+                            <span class="text-amber-500 font-bold uppercase block mb-1">🎯 A Concepção</span>
+                            <p class="text-gray-400">Desenvolvido sob rigorosa curadoria estratégica de arquitetura de dados e conformidade jurídica extrajudicial por ACSantos.</p>
+                        </div>
+                        <div class="bg-saceDark/60 p-3 rounded-lg border border-saceBorder">
+                            <span class="text-amber-500 font-bold uppercase block mb-1">🚀 Expansão de Rede Nacional</span>
+                            <p class="text-gray-400">Conectando polos, filiais e comarcas de ponta a ponta com segurança institucional absoluta.</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-right text-gray-500 italic pt-2">CEO e Fundador: ACSantos | Brasília, Distrito Federal</p>
+                </div>
+            </section>
             
             <!-- TOPO: MÓDULOS DE SUPORTE -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -376,6 +412,159 @@
         </main>
     </div>
 
+    <!-- ========================================== -->
+    <!-- TELA CHEIA / MODAL OCULTO: SALA MASTER BRASÍLIA -->
+    <!-- ========================================== -->
+    <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-saceDark flex flex-col">
+        <!-- Barra de Topo da Sala Master -->
+        <header class="bg-saceCard border-b border-amber-500/40 px-6 py-4 flex justify-between items-center z-20">
+            <div class="flex items-center space-x-3">
+                <span class="bg-amber-500/20 text-amber-400 text-xs font-black px-3 py-1.5 rounded border border-amber-500/40 uppercase tracking-widest animate-pulse">🎥 SALA MASTER BRASÍLIA — TRANSMISSÃO GLOBAL</span>
+                <span class="text-xs text-gray-400 hidden sm:inline">Governança Unificada • Filiais DF & GO • Entrevistas de Cargos SACE</span>
+            </div>
+            <!-- Botão de Clique e Volta exigido pelo Gênio -->
+            <button onclick="fecharSalaMasterModal()" class="bg-amber-500 hover:bg-amber-600 text-saceDark px-5 py-2 rounded-lg text-xs font-extrabold uppercase tracking-wider transition-all shadow-lg flex items-center space-x-2">
+                <span>← Voltar ao Painel Operacional</span>
+            </button>
+        </header>
+
+        <!-- Grade de Vídeo Central e Filiais ao Redor (Acima, Abaixo, Direita, Esquerda) -->
+        <div class="flex-1 p-4 md:p-6 overflow-y-auto grid grid-cols-1 md:grid-cols-4 grid-rows-3 gap-4 bg-[#07090f]">
+            
+            <!-- TOPO (Mini tela 1: Filial Entorno GO) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Entorno GO</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">🏢</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Valparaíso/GO (Gestor)</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- CENTRO SUPERIOR (Mini tela 2: Entrevista / Candidato Vaga) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-2">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-purple-400 font-bold z-10">Processo Seletivo SACE</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">👤</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Candidato a Advogado Sênior (Entrevista)</span>
+                    <span class="text-amber-400 font-bold">Em Arguição</span>
+                </div>
+            </div>
+
+            <!-- TOPO DIREITA (Mini tela 3: Filial Norte) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Sobradinho DF</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">🏛️</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Sobradinho/DF (Operação)</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- ESQUERDA (Mini tela 4: Filial Paranoá) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1 md:row-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Filial Paranoá DF</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">📍</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Paranoá/DF (REURB)</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- TELA MASTER CENTRAL (Grande Painel em Destaque) -->
+            <div class="bg-saceCard border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden shadow-2xl md:col-span-2 md:row-span-1 bg-gradient-to-b from-saceCard to-saceDark">
+                <div class="absolute top-3 left-3 bg-amber-500 text-saceDark px-2.5 py-0.5 rounded text-xs font-black z-10 uppercase tracking-wider">
+                    ★ TELA MASTER SACE BRASÍLIA (CEO ACSantos)
+                </div>
+                <div class="absolute top-3 right-3 bg-red-600/90 text-white px-2.5 py-0.5 rounded text-[10px] font-bold z-10 flex items-center space-x-1.5 animate-pulse">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    <span>GRAVAÇÃO INSTITUCIONAL ATIVA</span>
+                </div>
+                
+                <div class="flex-1 bg-saceDark/90 rounded-xl my-8 flex flex-col items-center justify-center border border-amber-500/30 relative">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400 text-2xl font-black mb-2 shadow-lg">
+                        SACE
+                    </div>
+                    <h3 class="text-sm font-bold text-white">Comando Executivo Nacional & Validação de Minutas</h3>
+                    <p class="text-[11px] text-gray-400 text-center max-w-sm mt-1">Painel centralizado de deliberação para filiais do Distrito Federal e Estado de Goiás.</p>
+                </div>
+
+                <div class="flex justify-between items-center text-xs pt-2 border-t border-saceBorder">
+                    <span class="text-gray-400">Status de Rede: <strong class="text-emerald-400">100% Criptografado</strong></span>
+                    <div class="flex space-x-2">
+                        <button onclick="alert('Áudio principal alternado.')" class="bg-saceDark hover:bg-gray-700 text-gray-200 px-3 py-1.5 rounded border border-saceBorder font-bold">🎙️ Mutar</button>
+                        <button onclick="alert('Ata e gravação da Sessão Master gravadas no banco de dados com sucesso.')" class="bg-amber-600 hover:bg-amber-700 text-saceDark px-3 py-1.5 rounded font-black uppercase">💾 Salvar Ata</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DIREITA (Mini tela 5: Topografia Parceira) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1 md:row-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Parceiro Topografia</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">📐</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Equipe RTK & Geodésia</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- BAIXO ESQUERDA (Mini tela 6: Jurídico Matriz) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Núcleo Jurídico</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">⚖️</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Advocacia Extrajudicial</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- BAIXO CENTRO (Mini tela 7: Contabilidade SACE) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-2">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Contabilidade & Splits</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">📊</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-emerald-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Auditoria Contábil e Repasses (DF/GO)</span>
+                    <span class="text-emerald-400 font-bold">Online</span>
+                </div>
+            </div>
+
+            <!-- BAIXO DIREITA (Mini tela 8: Expansão Nacional) -->
+            <div class="bg-saceCard border border-saceBorder rounded-xl p-3 flex flex-col justify-between relative overflow-hidden shadow-lg md:col-span-1">
+                <div class="absolute top-2 left-2 bg-black/60 px-2 py-0.5 rounded text-[10px] text-amber-400 font-bold z-10">Futuras Filiais</div>
+                <div class="h-28 bg-saceDark/80 rounded-lg flex items-center justify-center border border-saceBorder relative">
+                    <span class="text-2xl">🌐</span>
+                    <span class="absolute bottom-1 right-2 w-2 h-2 rounded-full bg-gray-500"></span>
+                </div>
+                <div class="text-[11px] text-gray-300 mt-2 flex justify-between items-center">
+                    <span class="truncate font-semibold">Expansão Regional</span>
+                    <span class="text-gray-400 font-bold">Standby</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- MODAL DINÂMICO DE PARCEIROS -->
     <div id="modalParceiro" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
         <div class="bg-saceCard border border-saceBorder rounded-xl p-6 w-full max-w-lg shadow-2xl space-y-4">
@@ -448,7 +637,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CONTROLE, LOGIN E API SQLITE -->
+    <!-- SCRIPT DE CONTROLE E NAVEGAÇÃO DA SALA MASTER -->
     <script>
         let tipoParceiroAtual = 'Advogado';
 
@@ -458,7 +647,6 @@
             if(user && pass) {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('appContainer').classList.remove('hidden');
-                atualizarTabelasSACE();
             } else {
                 alert('Preencha os campos de acesso.');
             }
@@ -467,6 +655,21 @@
         function fazerLogout() {
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('loginScreen').classList.remove('hidden');
+        }
+
+        function abrirSalaMasterModal() {
+            document.getElementById('salaMasterModal').classList.remove('hidden');
+        }
+
+        function fecharSalaMasterModal() {
+            document.getElementById('salaMasterModal').classList.add('hidden');
+        }
+
+        function toggleManifesto() {
+            const conteudo = document.getElementById('conteudoManifesto');
+            const btn = document.getElementById('btnToggleManifesto');
+            conteudo.classList.toggle('hidden');
+            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
         }
 
         function toggleComercial() {
@@ -609,10 +812,6 @@
             } else {
                 alert('Preencha os campos obrigatórios.');
             }
-        }
-
-        function atualizarTabelasSACE() {
-            // Inicialização padrão do painel
         }
 
         window.addEventListener('DOMContentLoaded', () => {
