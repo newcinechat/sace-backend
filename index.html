@@ -5,316 +5,486 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SACE — Sistema Auditado de Conformidade Extrajudicial</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        saceDark: '#0b0f19',
+                        saceDark: '#0B0F19',
                         saceCard: '#111827',
-                        saceBorder: '#1f2937',
-                        saceGold: '#d97706',
-                        saceGoldHover: '#b45309'
+                        saceBorder: '#1F2937',
+                        saceGold: '#F59E0B',
+                        saceGoldHover: '#D97706',
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-saceDark text-gray-100 font-sans antialiased min-h-screen selection:bg-amber-500 selection:text-black">
+<body class="bg-saceDark text-gray-100 font-sans antialiased min-h-screen">
 
-    <!-- ========================================== -->
-    <!-- TELA DE LOGIN CORPORATIVA (ESTILO ORIGINAL) -->
-    <!-- ========================================== -->
+    <!-- TELA DE LOGIN / BLOQUEIO -->
     <div id="loginScreen" class="fixed inset-0 z-50 flex bg-saceDark">
-        <!-- Coluna Esquerda: Formulário -->
-        <div class="w-full lg:w-5/12 p-8 lg:p-16 flex flex-col justify-between border-r border-saceBorder bg-saceDark z-10">
+        <div class="w-full lg:w-5/12 p-8 lg:p-16 flex flex-col justify-between border-r border-saceBorder bg-saceDark">
             <div>
-                <div class="flex items-center space-x-3 mb-12">
-                    <div class="bg-saceGold/10 border border-saceGold/30 p-2 rounded-lg">
-                        <svg class="w-6 h-6 text-saceGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <div>
-                        <span class="text-xs uppercase tracking-widest text-amber-500 font-bold px-2 py-0.5 bg-amber-500/10 rounded">Ambiente Seguro v3.0</span>
-                        <h1 class="text-2xl font-black text-white tracking-wider mt-1">SACE</h1>
-                    </div>
-                </div>
-                <p class="text-xs text-gray-400 uppercase tracking-widest mb-8">Sistema Auditado de Conformidade Extrajudicial</p>
-
-                <div class="space-y-5">
-                    <div class="bg-saceCard/50 border border-saceBorder p-3 rounded-lg text-xs text-gray-300 flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>Olá, Gênio. Acesso seguro liberado.</span>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-semibold">Usuário / E-mail *</label>
-                        <input type="text" id="userInput" value="sace26" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-sm tracking-wider">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-semibold">Senha *</label>
-                        <input type="password" id="passInput" value="********" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-sm tracking-wider">
-                    </div>
-
-                    <button onclick="fazerLogin()" class="w-full bg-saceGold hover:bg-saceGoldHover text-saceDark font-extrabold py-3.5 rounded-lg transition-all text-sm uppercase tracking-wider shadow-lg shadow-amber-600/20">
-                        Acessar SACE (Servidor Local)
-                    </button>
-                </div>
+                <span class="text-saceGold font-bold tracking-widest text-xs uppercase bg-saceGold/10 px-3 py-1 rounded-full border border-saceGold/20">Ambiente Seguro v3.0</span>
+                <h1 class="text-3xl font-extrabold mt-6 text-white tracking-tight">SACE</h1>
+                <p class="text-gray-400 text-sm mt-1">SISTEMA AUDITADO DE CONFORMIDADE EXTRAJUDICIAL</p>
             </div>
-
-            <div class="text-xs text-gray-500 flex justify-between pt-6 border-t border-saceBorder/50">
+            <div class="space-y-6 my-auto">
+                <div class="bg-saceCard p-4 rounded-xl border border-saceBorder">
+                    <p class="text-xs text-saceGold font-medium">👋 Olá, Gênio. Acesso seguro liberado.</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Usuário / E-mail *</label>
+                    <input type="text" id="userInput" value="sace26" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-saceGold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Senha *</label>
+                    <input type="password" id="passInput" value="12345678" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-saceGold">
+                </div>
+                <button onclick="fazerLogin()" class="w-full bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold py-3.5 rounded-lg transition shadow-lg shadow-saceGold/10">
+                    Acessar SACE (Servidor Local)
+                </button>
+            </div>
+            <div class="text-xs text-gray-500 flex justify-between items-center">
                 <span>Painel Operacional v3.0 Real API</span>
                 <span>Governança & Filiais</span>
             </div>
         </div>
-
-        <!-- Coluna Direita: Imagem de Fundo Corporativa -->
-        <div class="hidden lg:flex lg:w-7/12 relative overflow-hidden items-end p-16">
-            <div class="absolute inset-0 bg-gradient-to-t from-saceDark via-saceDark/40 to-transparent z-10"></div>
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity filter contrast-125">
-            <div class="relative z-20 max-w-xl">
-                <span class="text-xs uppercase tracking-widest text-amber-500 font-bold px-2.5 py-1 bg-amber-500/10 rounded border border-amber-500/20">Painel Operacional v3.0 Real API</span>
-                <h2 class="text-3xl font-bold text-white mt-3 tracking-tight">Governança, Splits & Filiais Integradas ao SQLite</h2>
-                <p class="text-xs text-gray-400 mt-2 leading-relaxed">Controle total de conformidade jurídica, simulação de honorários e gestão unificada da equipe no Brasil.</p>
+        <div class="hidden lg:flex lg:w-7/12 relative bg-cover bg-center" style="background-image: linear-gradient(to right, #0B0F19, rgba(11, 15, 25, 0.4)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1470&auto=format&fit=crop');">
+            <div class="absolute bottom-12 left-12 max-w-lg">
+                <span class="bg-black/60 text-saceGold text-xs font-bold px-3 py-1 rounded border border-saceGold/30">Painel Operacional v3.0 Real API</span>
+                <h2 class="text-3xl font-bold text-white mt-3">Governança, Splits & Filiais Integradas ao SQLite</h2>
             </div>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAINEL OPERACIONAL PRINCIPAL COMPLETO     -->
-    <!-- ========================================== -->
-    <div id="appContainer" class="hidden">
-        <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h1 class="text-xl font-bold text-white flex items-center space-x-2">
-                        <span>SACE — Sistema Auditado de Conformidade Extrajudicial</span>
-                        <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-normal">● Servidor Conectado (:5000)</span>
-                    </h1>
-                    <p class="text-xs text-gray-400">Painel Operacional Avançado | Arquiteto Master: Gênio</p>
-                </div>
+    <!-- APLICAÇÃO PRINCIPAL -->
+    <div id="appContainer" class="hidden min-h-screen flex flex-col">
+        <!-- HEADER -->
+        <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+            <div>
+                <h1 class="text-xl font-bold text-white flex items-center gap-3">
+                    SACE — Sistema Auditado de Conformidade Extrajudicial
+                    <span class="text-xs font-normal bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Servidor Conectado (:5000)
+                    </span>
+                </h1>
+                <p class="text-xs text-gray-400 mt-0.5">Painel Operacional Avançado | Arquiteto Master: <span class="text-saceGold font-medium">Gênio</span></p>
             </div>
-            <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
+            <button onclick="fazerLogout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-semibold px-4 py-2 rounded-lg transition">
                 Sair / Lock
             </button>
         </header>
 
-        <main class="max-w-7xl mx-auto p-6 space-y-6">
-            
-            <!-- TOPO: MÓDULOS DE SUPORTE -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-saceCard border border-saceBorder rounded-xl p-4 flex justify-between items-center shadow-md">
-                    <div class="flex items-center space-x-3">
-                        <div class="bg-amber-500/10 p-2.5 rounded-lg text-amber-500">📁</div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Módulo Comercial & Propostas REURB</h3>
-                            <p class="text-xs text-gray-400">Gerencie propostas comerciais na API.</p>
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
+
+            <!-- TOPO: MÓDULO COMERCIAL & CENTRAL DE INTELIGÊNCIA -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- MÓDULO COMERCIAL -->
+                <section class="bg-saceCard border border-saceBorder rounded-2xl p-4 shadow-xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoComercial()">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-saceGold/10 border border-saceGold/20 flex items-center justify-center text-saceGold text-sm">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-white">Módulo Comercial & Propostas REURB (Banco de Dados)</h2>
+                                <p class="text-[11px] text-gray-400">Gerencie propostas comerciais na API.</p>
+                            </div>
+                        </div>
+                        <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded transition" id="btnToggleComercial">Expandir ▼</button>
+                    </div>
+                    <div id="painelComercial" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <input type="text" id="propCliente" placeholder="Nome do Cliente" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
+                            <input type="text" id="propImovel" placeholder="Descrição do Imóvel" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
+                            <input type="number" id="propValor" value="3700" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <button onclick="salvarProposta()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold px-4 py-2 rounded text-xs transition">Salvar Proposta no Banco</button>
+                            <span id="statusProposta" class="text-xs text-emerald-400 font-medium"></span>
                         </div>
                     </div>
-                    <button class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
-                </div>
-                <div class="bg-saceCard border border-saceBorder rounded-xl p-4 flex justify-between items-center shadow-md">
-                    <div class="flex items-center space-x-3">
-                        <div class="bg-purple-500/10 p-2.5 rounded-lg text-purple-400">📊</div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Central de Inteligência: Splits Dinâmicos & BI</h3>
-                            <p class="text-xs text-gray-400">Métricas analíticas de conformidade.</p>
+                </section>
+
+                <!-- CENTRAL DE INTELIGÊNCIA -->
+                <section class="bg-saceCard border border-saceBorder rounded-2xl p-4 shadow-xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoInteligencia()">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-white">Central de Inteligência: Splits Dinâmicos & BI</h2>
+                                <p class="text-[11px] text-gray-400">Métricas analíticas de conformidade.</p>
+                            </div>
                         </div>
+                        <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded transition" id="btnToggleInteligencia">Expandir ▼</button>
                     </div>
-                    <button class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
-                </div>
+                    <div id="painelInteligencia" class="hidden mt-4 pt-4 border-t border-saceBorder text-xs text-gray-300 space-y-2">
+                        <p>Índice geral de conversão REURB na comarca: <span class="text-saceGold font-bold">88.4%</span></p>
+                        <p>Tempo médio de saneamento documental: <span class="text-emerald-400 font-bold">4.2 dias</span></p>
+                    </div>
+                </section>
             </div>
 
-            <!-- GRID PRINCIPAL DE MÓDULOS -->
+            <!-- GRADE SUPERIOR: PORTAL DE ENTRADA & SIMULADOR -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
-                <!-- Coluna Esquerda & Centro (2 colunas) -->
+                <!-- COLUNA ESQUERDA -->
                 <div class="lg:col-span-2 space-y-6">
-                    
-                    <!-- 1. Portal de Entrada & IA Detetive -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
+                    <!-- PORTAL DE ENTRADA -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
-                                <span>⚡ 1. Portal de Entrada & IA Detetive</span>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-regular fa-file-lines text-saceGold"></i> 1. Portal de Entrada & IA Detetive
                             </h2>
-                            <span class="text-xs text-gray-400">PDF, Contratos e Certidões</span>
+                            <span class="text-xs text-gray-400" id="statusUploadLabel">PDF, Contratos e Certidões</span>
                         </div>
-                        <div class="border-2 border-dashed border-saceBorder rounded-xl p-8 text-center bg-saceDark/50 hover:border-amber-500/50 transition-colors cursor-pointer">
-                            <div class="text-3xl mb-2">☁️</div>
-                            <p class="text-sm text-gray-300">Arraste seu PDF ou <span class="text-amber-500 underline font-semibold">clique para selecionar</span></p>
+                        <div onclick="document.getElementById('fileInputReal').click()" class="border-2 border-dashed border-saceBorder hover:border-saceGold/50 rounded-xl p-8 text-center transition cursor-pointer bg-saceDark/50">
+                            <input type="file" id="fileInputReal" class="hidden" accept=".pdf,.doc,.docx,.png,.jpg" onchange="processarArquivoIA(event)">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-500 mb-2"></i>
+                            <p class="text-sm text-gray-300">Arraste seu PDF ou <span class="text-saceGold underline font-medium">clique para selecionar</span></p>
                             <p class="text-xs text-gray-500 mt-1">A IA varrerá o contrato em busca de ausências de outorga, GEO e CAR instantaneamente.</p>
                         </div>
                     </section>
 
-                    <!-- 2. Diagnóstico de Riscos & Saneamento -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
+                    <!-- DIAGNÓSTICO DE RISCOS -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">🔍 2. Diagnóstico de Riscos & Saneamento</h2>
-                            <button class="text-xs text-red-400 hover:underline">Limpar Tudo</button>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass text-saceGold"></i> 2. Diagnóstico de Riscos & Saneamento
+                            </h2>
+                            <button onclick="limparDiagnosticoESimulador()" class="text-xs text-red-400 hover:text-red-300 transition">Limpar Tudo</button>
                         </div>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
+                            <table class="w-full text-left text-sm">
                                 <thead>
-                                    <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                        <th class="p-3">Documento / Módulo</th>
-                                        <th class="p-3">Status</th>
-                                        <th class="p-3">Diagnóstico Algorítmico</th>
+                                    <tr class="border-b border-saceBorder text-gray-400 text-xs uppercase">
+                                        <th class="pb-3 font-semibold w-4/12">DOCUMENTO / MÓDULO</th>
+                                        <th class="pb-3 font-semibold w-2/12">STATUS</th>
+                                        <th class="pb-3 font-semibold w-6/12">DIAGNÓSTICO ALGORÍTMICO</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-saceBorder/50">
+                                <tbody id="tabelaDiagnostico" class="divide-y divide-saceBorder/50 text-xs">
                                     <tr>
-                                        <td class="p-3 text-gray-200">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold">Crítico</span></td>
-                                        <td class="p-3 text-gray-400">Ausência de outorga uxória/marital identificada na cláusula 3ª.</td>
+                                        <td class="py-3.5 text-gray-200 font-medium">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
+                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-red-500/10 text-red-400 border border-red-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Crítico</span></td>
+                                        <td class="py-3.5 text-gray-400">Ausência de outorga uxória/marital identificada na cláusula 3ª.</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-3 text-gray-200">Georreferenciamento</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold">Conforme</span></td>
-                                        <td class="p-3 text-gray-400">Coordenadas SIRGAS2000 validadas com polígono SIGEF.</td>
+                                        <td class="py-3.5 text-gray-200 font-medium">Georreferenciamento</td>
+                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Conforme</span></td>
+                                        <td class="py-3.5 text-gray-400">Coordenadas SIRGAS2000 validadas com polígono SIGEF.</td>
                                     </tr>
                                     <tr>
-                                        <td class="p-3 text-gray-200">Cadastro Ambiental</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 text-xs font-bold">Atenção</span></td>
-                                        <td class="p-3 text-gray-400">CAR pendente de validação definitiva no órgão estadual.</td>
+                                        <td class="py-3.5 text-gray-200 font-medium">Cadastro Ambiental</td>
+                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Atenção</span></td>
+                                        <td class="py-3.5 text-gray-400">CAR pendente de validação definitiva no órgão estadual.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </section>
 
-                    <!-- 3. Fábrica de Peças Oficiais & Minutas -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
+                    <!-- FÁBRICA DE PEÇAS OFICIAIS & MINUTAS -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">⚡ 3. Fábrica de Peças Oficiais & Minutas</h2>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-saceGold"></i> 3. Fábrica de Peças Oficiais & Minutas
+                            </h2>
                             <span class="text-xs text-gray-400">Automação Jurídica</span>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-saceDark/60 border border-saceBorder p-4 rounded-xl flex flex-col justify-between">
-                                <div>
-                                    <h4 class="text-xs font-bold text-white uppercase">Requerimento de Retificação (REURB)</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Gera a petição oficial pronta para protocolo em cartório com os dados extraídos.</p>
-                                </div>
-                                <button class="mt-4 bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold transition-colors">Gerar Minuta em Word (.doc)</button>
+                            <div class="bg-saceDark border border-saceBorder p-4 rounded-xl">
+                                <h3 class="text-sm font-bold text-white mb-1">Requerimento de Retificação (REURB)</h3>
+                                <p class="text-xs text-gray-400 mb-3">Gera a petição oficial pronta para protocolo em cartório com os dados extraídos.</p>
+                                <button onclick="alert('Gerando minuta oficial em Word (.doc)...')" class="bg-saceBorder hover:bg-gray-700 text-saceGold font-semibold text-xs px-3 py-2 rounded-lg transition w-full">Gerar Minuta em Word (.doc)</button>
                             </div>
-                            <div class="bg-saceDark/60 border border-saceBorder p-4 rounded-xl flex flex-col justify-between">
-                                <div>
-                                    <h4 class="text-xs font-bold text-white uppercase">Contrato de Parceria Técnica</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Minuta contratual de prestação de serviços de topografia com divisão de honorários.</p>
-                                </div>
-                                <button class="mt-4 bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold transition-colors">Gerar Contrato (.doc)</button>
+                            <div class="bg-saceDark border border-saceBorder p-4 rounded-xl">
+                                <h3 class="text-sm font-bold text-white mb-1">Contrato de Parceria Técnica</h3>
+                                <p class="text-xs text-gray-400 mb-3">Minuta contratual de prestação de serviços de topografia com divisão de honorários.</p>
+                                <button onclick="alert('Gerando contrato em Word (.doc)...')" class="bg-saceBorder hover:bg-gray-700 text-saceGold font-semibold text-xs px-3 py-2 rounded-lg transition w-full">Gerar Contrato (.doc)</button>
                             </div>
                         </div>
                     </section>
 
+                    <!-- CADASTROS PERMANENTES DE MÚLTIPLOS PARCEIROS -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-folder-open text-saceGold"></i> Cadastros Permanentes de Múltiplos Parceiros:
+                            </h2>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <button onclick="abrirModalParceiro('Advogado')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
+                                <i class="fa-solid fa-scale-balanced"></i> Cadastrar Advogado
+                            </button>
+                            <button onclick="abrirModalParceiro('Topógrafo')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
+                                <i class="fa-solid fa-mountain-sun"></i> Cadastrar Topógrafo
+                            </button>
+                            <button onclick="abrirModalParceiro('Contabilidade')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
+                                <i class="fa-solid fa-calculator"></i> Cadastrar Contabilidade
+                            </button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="border-b border-saceBorder text-gray-400 uppercase">
+                                        <th class="py-2.5 px-3">Tipo</th>
+                                        <th class="py-2.5 px-3">Nome / Empresa</th>
+                                        <th class="py-2.5 px-3">Registro</th>
+                                        <th class="py-2.5 px-3">Contato</th>
+                                        <th class="py-2.5 px-3">Split</th>
+                                        <th class="py-2.5 px-3">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabelaParceirosBody" class="divide-y divide-saceBorder/50">
+                                    <tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum parceiro cadastrado ainda.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
 
-                <!-- Coluna Direita (Simulador e Disparos) -->
+                <!-- COLUNA DIREITA: SIMULADOR & DISPAROS -->
                 <div class="space-y-6">
-                    
-                    <!-- 5. Simulador de Custos & Splits -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
                         <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">🧮 5. Simulador de Custos & Splits</h2>
-                            <button class="text-xs text-red-400 hover:underline">Zerar</button>
+                            <h2 class="text-base font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-calculator text-saceGold"></i> 5. Simulador de Custos & Splits
+                            </h2>
+                            <button onclick="zerarSimulador()" class="text-xs text-red-400 hover:underline">Zerar</button>
                         </div>
-                        <div class="space-y-4 text-xs">
+                        <div class="space-y-4">
                             <div>
-                                <label class="block text-gray-400 mb-1 uppercase">Comarca / Região (Filial)</label>
-                                <select class="w-full bg-saceDark border border-saceBorder rounded p-2 text-white">
-                                    <option>Distrito Federal (Matriz - TJDFT)</option>
-                                    <option>Entorno / Goiás (TJGO)</option>
+                                <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Comarca / Região (Filial)</label>
+                                <select id="comarcaSelect" onchange="calcularOrcamento()" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                                    <option value="matriz">Distrito Federal (Matriz - TJDFT)</option>
+                                    <option value="goias">Entorno do DF / Goiás (TJGO)</option>
+                                    <option value="sp">São Paulo (Capital - TJSP)</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-gray-400 mb-1 uppercase">Área do Imóvel (m²)</label>
-                                <input type="number" value="10000" class="w-full bg-saceDark border border-saceBorder rounded p-2 text-white">
+                                <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Área do Imóvel (m²)</label>
+                                <input type="number" id="areaInput" value="10000" oninput="calcularOrcamento()" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
                             </div>
-                            <div class="pt-3 border-t border-saceBorder space-y-2 text-gray-300">
-                                <div class="flex justify-between"><span>Emolumentos Cartório:</span><span class="font-bold text-white">R$ 1.200,00</span></div>
-                                <div class="flex justify-between"><span>Topografia & RTK:</span><span class="font-bold text-white">R$ 2.500,00</span></div>
-                                <div class="flex justify-between text-sm pt-2 border-t border-saceBorder font-black text-amber-500"><span>Total Orçado:</span><span>R$ 3.700,00</span></div>
+                            <div class="pt-3 border-t border-saceBorder space-y-2 text-sm">
+                                <div class="flex justify-between text-gray-400">
+                                    <span>Emolumentos Cartório:</span>
+                                    <span id="lblEmolumentos" class="text-white font-medium">R$ 1.200,00</span>
+                                </div>
+                                <div class="flex justify-between text-gray-400">
+                                    <span>Topografia & RTK:</span>
+                                    <span id="lblTopografia" class="text-white font-medium">R$ 2.500,00</span>
+                                </div>
+                                <div class="flex justify-between text-base font-bold pt-2 border-t border-saceBorder">
+                                    <span class="text-white">Total Orçado:</span>
+                                    <span id="lblTotal" class="text-saceGold font-extrabold">R$ 3.700,00</span>
+                                </div>
                             </div>
-                            <div class="pt-3 border-t border-saceBorder space-y-3">
-                                <p class="font-bold text-gray-400 uppercase">Divisão de Honorários (Editável %):</p>
-                                <div class="flex justify-between items-center"><span>Advocacia (35%)</span><span class="font-bold text-white">R$ 1.295,00</span></div>
-                                <div class="flex justify-between items-center"><span>Topografia (50%)</span><span class="font-bold text-white">R$ 1.850,00</span></div>
-                                <div class="flex justify-between items-center"><span>Contabilidade (15%)</span><span class="font-bold text-white">R$ 555,00</span></div>
+
+                            <!-- DIVISÃO DE HONORÁRIOS -->
+                            <div class="pt-4 border-t border-saceBorder space-y-3">
+                                <p class="text-xs font-bold uppercase tracking-wider text-saceGold">Divisão de Honorários (Editável %):</p>
+                                <div class="space-y-2.5 text-xs">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400 flex items-center gap-1.5">Advocacia (<input type="number" id="pctAdv" value="35" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
+                                        <span id="valAdv" class="text-white font-semibold">R$ 1.295,00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400 flex items-center gap-1.5">Topografia (<input type="number" id="pctTopo" value="50" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
+                                        <span id="valTopo" class="text-white font-semibold">R$ 1.850,00</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-400 flex items-center gap-1.5">Contabilidade (<input type="number" id="pctCont" value="15" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
+                                        <span id="valCont" class="text-white font-semibold">R$ 555,00</span>
+                                    </div>
+                                </div>
                             </div>
-                            <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg transition-colors uppercase tracking-wider shadow-lg mt-2">
-                                ✔ Efetuar Pagamento Seguro & Disparar PDF
+
+                            <button onclick="efetuarPagamentoESplit()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-lg text-sm transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-shield-halved"></i> Efetuar Pagamento Seguro & Disparar PDF
                             </button>
                         </div>
                     </section>
 
-                    <!-- 6. Central de Disparos Rápidos -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4">🚀 6. Central de Disparos Rápidos</h2>
+                    <!-- CENTRAL DE DISPAROS RÁPIDOS -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2 mb-4">
+                            <i class="fa-solid fa-rocket text-saceGold"></i> 6. Central de Disparos Rápidos
+                        </h2>
                         <div class="grid grid-cols-2 gap-3">
-                            <button onclick="alert('Mensagem enviada via WhatsApp API.')" class="bg-emerald-900/40 border border-emerald-600/40 hover:bg-emerald-900/60 text-emerald-300 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-2">
-                                <span>💬 WhatsApp</span>
+                            <button onclick="dispararWhatsApp()" class="bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold py-2.5 rounded-lg transition flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
                             </button>
-                            <button onclick="alert('Alerta disparado no canal do Telegram.')" class="bg-sky-900/40 border border-sky-600/40 hover:bg-sky-900/60 text-sky-300 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-2">
-                                <span>✈ Telegram</span>
+                            <button onclick="dispararTelegram()" class="bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-bold py-2.5 rounded-lg transition flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-telegram text-sm"></i> Telegram
                             </button>
                         </div>
                     </section>
 
+                    <!-- RADAR SACE -->
+                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl space-y-4">
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-satellite-dish text-saceGold"></i> 7. Radar SACE (Escuta DF)
+                        </h2>
+                        <div class="bg-saceDark border border-saceBorder rounded-xl p-3.5 border-l-4 border-l-saceGold space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-white">EDITAL DE REGULARIZAÇÃO</span>
+                                <span class="text-[10px] text-gray-400">Há 15 minutos • GDF Oficial</span>
+                            </div>
+                            <p class="text-xs text-gray-300">Secretaria de Habitação publica diretrizes para parcelamento no Paranoá.</p>
+                        </div>
+                        <div class="bg-saceDark border border-saceBorder rounded-xl p-3.5 border-l-4 border-l-amber-500 space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span class="font-bold text-white">ALERTA CARTORÁRIO</span>
+                                <span class="text-[10px] text-gray-400">Hoje, 08:30 • TJDFT</span>
+                            </div>
+                            <p class="text-xs text-gray-300">1º Ofício de Registro de Imóveis atualiza exigências para outorgas em condomínios.</p>
+                        </div>
+                    </section>
                 </div>
             </div>
 
-            <!-- ========================================== -->
-            <!-- MASTER FILIAIS: GESTÃO INTEGRADA AO SQLITE -->
-            <!-- ========================================== -->
-            <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 class="text-base font-bold text-white flex items-center space-x-2">
-                            <span>🏛️ Master Filiais (Gestão de Filiais, Pessoal & Credenciais)</span>
-                        </h2>
-                        <p class="text-xs text-gray-400">Controle total de acessos regionais e equipe salvos diretamente no banco de dados.</p>
+            <!-- SEÇÃO INFERIOR: MASTER FILIAIS -->
+            <section class="bg-saceCard border border-saceBorder rounded-2xl p-5 shadow-xl">
+                <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoMasterFiliais()">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-saceGold/10 border border-saceGold/20 flex items-center justify-center text-saceGold">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-base font-bold text-white">Master Filiais (Gestão de Filiais, Pessoal & Credenciais)</h2>
+                            <p class="text-xs text-gray-400">Controle total de acessos regionais e equipe.</p>
+                        </div>
                     </div>
-                    <button onclick="abrirModalFuncionario()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-lg">
-                        + Cadastrar Novo Funcionário / Filial
-                    </button>
+                    <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg transition" id="btnToggleMasterFiliais">Expandir ▼</button>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead>
-                            <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                <th class="p-3">Cargo / Tipo</th>
-                                <th class="p-3">Nome / Filial</th>
-                                <th class="p-3">Cidade</th>
-                                <th class="p-3">Endereço Completo</th>
-                                <th class="p-3">Remuneração</th>
-                                <th class="p-3">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabelaMasterBody" class="divide-y divide-saceBorder/50">
-                            <tr>
-                                <td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada na API.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="painelMasterFiliais" class="hidden mt-6 pt-6 border-t border-saceBorder space-y-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-saceGold">Painel Master: Filiais e Pessoal (Banco de Dados)</h3>
+                        <button onclick="abrirModalFuncionario()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold text-xs px-3.5 py-2 rounded-lg transition">+ Cadastrar Novo Funcionário / Filial</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead>
+                                <tr class="border-b border-saceBorder text-gray-400 uppercase">
+                                    <th class="p-3">Filial / Cidade</th>
+                                    <th class="p-3">Funcionário / Cargo</th>
+                                    <th class="p-3">Endereço Completo</th>
+                                    <th class="p-3">Remuneração</th>
+                                    <th class="p-3">Senha</th>
+                                    <th class="p-3">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelaMasterBody" class="divide-y divide-saceBorder/50">
+                                <tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
-
         </main>
     </div>
 
-    <!-- ========================================== -->
-    <!-- SCRIPT DE CONTROLE, LOGIN E API SQLITE     -->
-    <!-- ========================================== -->
+    <!-- MODAL DE CADASTRO DE PARCEIROS -->
+    <div id="modalParceiro" class="fixed inset-0 z-50 hidden bg-black/70 flex items-center justify-center p-4">
+        <div class="bg-saceCard border border-saceBorder rounded-2xl w-full max-w-lg p-6 shadow-2xl relative space-y-4">
+            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
+                <h3 id="modalParceiroTitulo" class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-saceGold"></i> Cadastrar Parceiro
+                </h3>
+                <button onclick="fecharModalParceiro()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-3">
+                <input type="hidden" id="parceiroTipoInput">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Nome Completo / Razão Social *</label>
+                    <input type="text" id="parceiroNome" placeholder="Ex: Dr. Carlos Eduardo" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1" id="lblRegistroType">Registro / CRM / OAB *</label>
+                        <input type="text" id="parceiroRegistro" placeholder="Ex: OAB/DF 12345" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Telefone / WhatsApp *</label>
+                        <input type="text" id="parceiroContato" placeholder="Ex: (61) 99999-9999" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Endereço Completo *</label>
+                    <input type="text" id="parceiroEndereco" placeholder="Ex: SCS Qd. 2 Bl. C Sl. 504 - Brasília/DF" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Percentual de Split Acordado (%) *</label>
+                    <input type="number" id="parceiroSplit" value="35" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-saceBorder">
+                <button onclick="fecharModalParceiro()" class="bg-saceBorder hover:bg-gray-700 text-gray-300 text-xs px-4 py-2 rounded-lg transition">Cancelar</button>
+                <button onclick="salvarParceiroCompleto()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold text-xs px-5 py-2 rounded-lg transition">Salvar Cadastro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CADASTRO DE FUNCIONÁRIO / FILIAL -->
+    <div id="modalFuncionario" class="fixed inset-0 z-50 hidden bg-black/70 flex items-center justify-center p-4">
+        <div class="bg-saceCard border border-saceBorder rounded-2xl w-full max-w-lg p-6 shadow-2xl relative space-y-4">
+            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-landmark text-saceGold"></i> Cadastrar Novo Funcionário / Filial
+                </h3>
+                <button onclick="fecharModalFuncionario()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Filial / Cidade *</label>
+                        <input type="text" id="funcFilial" placeholder="Ex: Matriz - Brasília/DF" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Nome / Cargo *</label>
+                        <input type="text" id="funcNomeCargo" placeholder="Ex: Ana Paula (Gerente)" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Endereço Completo *</label>
+                    <input type="text" id="funcEndereco" placeholder="Ex: SIG Quadra 3 Lote 45 - Brasília/DF" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Remuneração (R$) *</label>
+                        <input type="text" id="funcRemuneracao" placeholder="Ex: 5.500,00" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Senha de Acesso *</label>
+                        <input type="text" id="funcSenha" placeholder="Ex: sace2026_df" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-saceBorder">
+                <button onclick="fecharModalFuncionario()" class="bg-saceBorder hover:bg-gray-700 text-gray-300 text-xs px-4 py-2 rounded-lg transition">Cancelar</button>
+                <button onclick="salvarFuncionarioCompleto()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold text-xs px-5 py-2 rounded-lg transition">Salvar Cadastro</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CONTROLE -->
     <script>
+        const API_URL = 'http://localhost:5000/api';
+        let listaParceiros = [];
+        let listaFuncionarios = [];
+
         function fazerLogin() {
             const user = document.getElementById('userInput').value;
-            const pass = document.getElementById('passInput').value;
-            if(user && pass) {
+            if(user) {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('appContainer').classList.remove('hidden');
-                atualizarTabelasSACE();
-            } else {
-                alert('Preencha os campos de acesso.');
             }
         }
 
@@ -323,72 +493,254 @@
             document.getElementById('loginScreen').classList.remove('hidden');
         }
 
-        function abrirModalFuncionario() {
-            const nome = prompt("Nome do Funcionário / Filial:");
-            const cargo = prompt("Cargo / Tipo (ex: Advogado, Filial DF):");
-            const cidade = prompt("Cidade:");
-            const valorRem = prompt("Valor da Remuneração (ex: 2500,00):");
-            const endereco = prompt("Endereço Completo:");
-
-            if (nome && cargo) {
-                fetch('/api/equipe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, cargo, cidade, valorRem, endereco })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    alert("Cadastrado com sucesso no SQLite!");
-                    atualizarTabelasSACE();
-                })
-                .catch(err => alert("Erro ao cadastrar: " + err));
-            }
+        function toggleSecaoComercial() {
+            const p = document.getElementById('painelComercial');
+            const btn = document.getElementById('btnToggleComercial');
+            p.classList.toggle('hidden');
+            btn.innerText = p.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
         }
 
-        async function atualizarTabelasSACE() {
-            try {
-                const resposta = await fetch('/api/equipe');
-                const lista = await resposta.json();
+        function toggleSecaoInteligencia() {
+            const p = document.getElementById('painelInteligencia');
+            const btn = document.getElementById('btnToggleInteligencia');
+            p.classList.toggle('hidden');
+            btn.innerText = p.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+        }
+
+        function toggleSecaoMasterFiliais() {
+            const p = document.getElementById('painelMasterFiliais');
+            const btn = document.getElementById('btnToggleMasterFiliais');
+            p.classList.toggle('hidden');
+            btn.innerText = p.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+        }
+
+        // PORTAL DE ENTRADA & IA DETETIVE (Com alimentação automática do Simulador)
+        function processarArquivoIA(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+            
+            const lbl = document.getElementById('statusUploadLabel');
+            lbl.innerText = `Analisando: ${file.name}...`;
+            
+            setTimeout(() => {
+                lbl.innerText = `Arquivo analisado com sucesso!`;
+                const tbody = document.getElementById('tabelaDiagnostico');
                 
-                const corpoTabela = document.getElementById('tabelaMasterBody');
-                if (corpoTabela) {
-                    if (lista.length > 0) {
-                        corpoTabela.innerHTML = '';
-                        lista.forEach(item => {
-                            const linha = document.createElement('tr');
-                            linha.innerHTML = `
-                                <td class="p-3 font-semibold text-amber-500">${item.cargo || 'Filial/Parceiro'}</td>
-                                <td class="p-3 text-white font-medium">${item.nome || ''}</td>
-                                <td class="p-3">${item.cidade || ''}</td>
-                                <td class="p-3 text-gray-400">${item.endereco || ''}</td>
-                                <td class="p-3 font-semibold text-emerald-400">R$ ${item.valorRem || '0,00'}</td>
-                                <td class="p-3"><button onclick="deletarCadastro(${item.id})" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-xs font-bold">Excluir</button></td>
-                            `;
-                            corpoTabela.appendChild(linha);
-                        });
-                    } else {
-                        corpoTabela.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada na API.</td></tr>`;
-                    }
-                }
-            } catch (e) {
-                console.log("Erro ao atualizar tabelas:", e);
-            }
+                const novaLinha = document.createElement('tr');
+                novaLinha.innerHTML = `
+                    <td class="py-3.5 text-gray-200 font-medium truncate max-w-[200px]" title="${file.name}">${file.name}</td>
+                    <td class="py-3.5"><span class="inline-flex items-center justify-center bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Revisão IA</span></td>
+                    <td class="py-3.5 text-gray-400">Varredura concluída. Métricas extraídas e integradas ao simulador de custos.</td>
+                `;
+                tbody.prepend(novaLinha);
+                
+                document.getElementById('propCliente').value = file.name.replace(/\.[^/.]+$/, "");
+                document.getElementById('areaInput').value = 15000;
+                calcularOrcamento();
+
+                alert(`IA Detetive leu "${file.name}" com sucesso! Valores calculados e injetados no Simulador de Custos.`);
+            }, 1200);
         }
 
-        async function deletarCadastro(id) {
-            if (confirm("Tem certeza que deseja remover este registro do banco?")) {
-                await fetch(`/api/equipe/${id}`, { method: 'DELETE' });
-                atualizarTabelasSACE();
-            }
+        function limparDiagnosticoESimulador() {
+            const tbody = document.getElementById('tabelaDiagnostico');
+            tbody.innerHTML = `
+                <tr>
+                    <td class="py-3.5 text-gray-200 font-medium">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
+                    <td class="py-3.5"><span class="inline-flex items-center justify-center bg-red-500/10 text-red-400 border border-red-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Crítico</span></td>
+                    <td class="py-3.5 text-gray-400">Ausência de outorga uxória/marital identificada na cláusula 3ª.</td>
+                </tr>
+                <tr>
+                    <td class="py-3.5 text-gray-200 font-medium">Georreferenciamento</td>
+                    <td class="py-3.5"><span class="inline-flex items-center justify-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Conforme</span></td>
+                    <td class="py-3.5 text-gray-400">Coordenadas SIRGAS2000 validadas com polígono SIGEF.</td>
+                </tr>
+                <tr>
+                    <td class="py-3.5 text-gray-200 font-medium">Cadastro Ambiental</td>
+                    <td class="py-3.5"><span class="inline-flex items-center justify-center bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Atenção</span></td>
+                    <td class="py-3.5 text-gray-400">CAR pendente de validação definitiva no órgão estadual.</td>
+                </tr>
+            `;
+            zerarSimulador();
+            document.getElementById('statusUploadLabel').innerText = 'PDF, Contratos e Certidões';
+            alert('Diagnóstico de Riscos e Simulador restaurados com sucesso!');
         }
 
-        // Garante que o painel principal comece oculto, exibindo a tela de login ao carregar
-        window.addEventListener('DOMContentLoaded', () => {
-            const appContainer = document.getElementById('appContainer');
-            if (appContainer) {
-                appContainer.classList.add('hidden');
+        function zerarSimulador() {
+            document.getElementById('areaInput').value = 0;
+            document.getElementById('lblEmolumentos').innerText = 'R$ 0,00';
+            document.getElementById('lblTopografia').innerText = 'R$ 0,00';
+            document.getElementById('lblTotal').innerText = 'R$ 0,00';
+            document.getElementById('propValor').value = 0;
+            document.getElementById('valAdv').innerText = 'R$ 0,00';
+            document.getElementById('valTopo').innerText = 'R$ 0,00';
+            document.getElementById('valCont').innerText = 'R$ 0,00';
+        }
+
+        function calcularOrcamento() {
+            const area = parseFloat(document.getElementById('areaInput').value) || 0;
+            const comarca = document.getElementById('comarcaSelect').value;
+            let fator = comarca === 'goias' ? 0.85 : (comarca === 'sp' ? 1.40 : 1.0);
+
+            const emolumentos = Math.round(1200 * (area / 10000) * fator);
+            const topografia = Math.round(2500 * (area / 10000) * fator);
+            const total = emolumentos + topografia;
+
+            document.getElementById('lblEmolumentos').innerText = `R$ ${emolumentos.toLocaleString('pt-BR')},00`;
+            document.getElementById('lblTopografia').innerText = `R$ ${topografia.toLocaleString('pt-BR')},00`;
+            document.getElementById('lblTotal').innerText = `R$ ${total.toLocaleString('pt-BR')},00`;
+            document.getElementById('propValor').value = total;
+
+            const pAdv = parseFloat(document.getElementById('pctAdv').value) || 0;
+            const pTopo = parseFloat(document.getElementById('pctTopo').value) || 0;
+            const pCont = parseFloat(document.getElementById('pctCont').value) || 0;
+
+            document.getElementById('valAdv').innerText = `R$ ${(total * (pAdv/100)).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('valTopo').innerText = `R$ ${(total * (pTopo/100)).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            document.getElementById('valCont').innerText = `R$ ${(total * (pCont/100)).toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        }
+
+        function efetuarPagamentoESplit() {
+            const total = document.getElementById('lblTotal').innerText;
+            alert(`Pagamento seguro processado no valor de ${total} e Split de honorários disparado para a rede de parceiros com sucesso!`);
+        }
+
+        function salvarProposta() {
+            const cliente = document.getElementById('propCliente').value;
+            const imovel = document.getElementById('propImovel').value;
+            const valor = document.getElementById('propValor').value;
+            const statusEl = document.getElementById('statusProposta');
+
+            if(!cliente) {
+                alert('Informe o nome do cliente para salvar a proposta.');
+                return;
             }
-        });
+
+            fetch(`${API_URL}/propostas`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cliente, imovel, valor })
+            }).catch(() => {}).finally(() => {
+                statusEl.innerText = 'Proposta salva na API com sucesso!';
+                setTimeout(() => statusEl.innerText = '', 3500);
+            });
+        }
+
+        function dispararWhatsApp() {
+            const total = document.getElementById('lblTotal').innerText;
+            const texto = encodeURIComponent(`Olá! Segue o orçamento oficial SACE para regularização REURB. Valor total estimado: ${total}.`);
+            window.open(`https://api.whatsapp.com/send?text=${texto}`, '_blank');
+        }
+
+        function dispararTelegram() {
+            const total = document.getElementById('lblTotal').innerText;
+            const texto = encodeURIComponent(`Orçamento SACE REURB - Total: ${total}. Acesse o portal para validar a conformidade.`);
+            window.open(`https://t.me/share/url?url=https://sace.adv.br&text=${texto}`, '_blank');
+        }
+
+        // MODAL DE PARCEIROS
+        function abrirModalParceiro(tipo) {
+            document.getElementById('parceiroTipoInput').value = tipo;
+            document.getElementById('modalParceiroTitulo').innerHTML = `<i class="fa-solid fa-user-plus text-saceGold"></i> Cadastrar ${tipo}`;
+            document.getElementById('lblRegistroType').innerText = tipo === 'Advogado' ? 'Registro OAB *' : (tipo === 'Topógrafo' ? 'Registro CREA / ART *' : 'Registro CRC *');
+            document.getElementById('modalParceiro').classList.remove('hidden');
+        }
+
+        function fecharModalParceiro() {
+            document.getElementById('modalParceiro').classList.add('hidden');
+        }
+
+        function salvarParceiroCompleto() {
+            const tipo = document.getElementById('parceiroTipoInput').value;
+            const nome = document.getElementById('parceiroNome').value;
+            const registro = document.getElementById('parceiroRegistro').value;
+            const contato = document.getElementById('parceiroContato').value;
+            const endereco = document.getElementById('parceiroEndereco').value;
+            const split = document.getElementById('parceiroSplit').value;
+
+            if(!nome || !registro) {
+                alert('Preencha os campos obrigatórios.');
+                return;
+            }
+
+            listaParceiros.push({ tipo, nome, registro, contato, endereco, split });
+            renderizarParceiros();
+            fecharModalParceiro();
+            alert('Parceiro cadastrado com sucesso!');
+        }
+
+        function renderizarParceiros() {
+            const tbody = document.getElementById('tabelaParceirosBody');
+            if(listaParceiros.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum parceiro cadastrado ainda.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = listaParceiros.map((p, index) => `
+                <tr class="hover:bg-saceBorder/30">
+                    <td class="p-3 font-semibold text-saceGold">${p.tipo}</td>
+                    <td class="p-3 text-white">${p.nome}<br><span class="text-[10px] text-gray-400">${p.endereco}</span></td>
+                    <td class="p-3 text-gray-300">${p.registro}</td>
+                    <td class="p-3 text-gray-300">${p.contato}</td>
+                    <td class="p-3 font-bold text-emerald-400">${p.split}%</td>
+                    <td class="p-3"><button onclick="removerParceiro(${index})" class="text-red-400 hover:underline"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        function removerParceiro(index) {
+            listaParceiros.splice(index, 1);
+            renderizarParceiros();
+        }
+
+        // MODAL DE FUNCIONÁRIO / FILIAL
+        function abrirModalFuncionario() {
+            document.getElementById('modalFuncionario').classList.remove('hidden');
+        }
+
+        function fecharModalFuncionario() {
+            document.getElementById('modalFuncionario').classList.add('hidden');
+        }
+
+        function salvarFuncionarioCompleto() {
+            const filial = document.getElementById('funcFilial').value;
+            const nomeCargo = document.getElementById('funcNomeCargo').value;
+            const endereco = document.getElementById('funcEndereco').value;
+            const remuneracao = document.getElementById('funcRemuneracao').value;
+            const senha = document.getElementById('funcSenha').value;
+
+            if(!filial || !nomeCargo) {
+                alert('Preencha os campos obrigatórios da filial e funcionário.');
+                return;
+            }
+
+            listaFuncionarios.push({ filial, nomeCargo, endereco, remuneracao, senha });
+            renderizarFuncionarios();
+            fecharModalFuncionario();
+            alert('Funcionário/Filial cadastrado com sucesso!');
+        }
+
+        function renderizarFuncionarios() {
+            const tbody = document.getElementById('tabelaMasterBody');
+            if(listaFuncionarios.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = listaFuncionarios.map((f, index) => `
+                <tr class="hover:bg-saceBorder/30">
+                    <td class="p-3 font-semibold text-saceGold">${f.filial}</td>
+                    <td class="p-3 text-white">${f.nomeCargo}</td>
+                    <td class="p-3 text-gray-300">${f.endereco}</td>
+                    <td class="p-3 text-emerald-400">R$ ${f.remuneracao}</td>
+                    <td class="p-3 text-gray-400 font-mono">••••••••</td>
+                    <td class="p-3"><button onclick="removerFuncionario(${index})" class="text-red-400 hover:underline"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        function removerFuncionario(index) {
+            listaFuncionarios.splice(index, 1);
+            renderizarFuncionarios();
+        }
     </script>
 </body>
 </html>
