@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SACE — Sistema Auditado de Conformidade Extrajudicial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        saceDark: '#0B0F19',
+                        saceDark: '#0b0f19',
                         saceCard: '#111827',
-                        saceBorder: '#1F2937',
-                        saceGold: '#F59E0B',
-                        saceGoldHover: '#D97706',
+                        saceBorder: '#1f2937',
+                        saceGold: '#d97706',
+                        saceGoldHover: '#b45309'
                     }
                 }
             }
@@ -24,389 +23,75 @@
 </head>
 <body class="bg-saceDark text-gray-100 font-sans antialiased min-h-screen">
 
-    <!-- TELA DE LOGIN / BLOQUEIO -->
-    <div id="loginScreen" class="fixed inset-0 z-50 flex bg-saceDark">
-        <div class="w-full lg:w-5/12 p-8 lg:p-16 flex flex-col justify-between border-r border-saceBorder bg-saceDark">
-            <div>
-                <!-- LOGO INSERIDA NA TELA DE LOGIN -->
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-saceGold/10 border border-saceGold/30 flex items-center justify-center text-saceGold text-xl shadow-lg shadow-saceGold/10">
-                        <i class="fa-solid fa-landmark-dome"></i>
-                    </div>
-                    <div>
-                        <span class="text-saceGold font-bold tracking-widest text-[10px] uppercase bg-saceGold/10 px-2.5 py-0.5 rounded-full border border-saceGold/20">Ambiente Seguro v3.0</span>
-                        <h1 class="text-2xl font-extrabold text-white tracking-tight">SACE</h1>
-                    </div>
-                </div>
-                <p class="text-gray-400 text-xs mt-1">SISTEMA AUDITADO DE CONFORMIDADE EXTRAJUDICIAL</p>
+    <!-- TELA DE LOGIN CORPORATIVA -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-saceDark px-4">
+        <div class="max-w-md w-full bg-saceCard border border-saceBorder p-8 rounded-xl shadow-2xl">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-white tracking-wide">SACE</h1>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-widest">Sistema Auditado de Conformidade</p>
+                <p class="text-xs text-amber-500 mt-3 font-semibold">Arquiteto Master: Gênio</p>
             </div>
-            <div class="space-y-5 my-auto">
-                <div class="bg-saceCard p-3.5 rounded-xl border border-saceBorder">
-                    <p class="text-xs text-saceGold font-medium">👋 Olá, Gênio. Acesso seguro liberado.</p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1">Usuário / Master</label>
+                    <input type="text" id="userInput" class="w-full bg-saceDark border border-saceBorder rounded px-3 py-2 text-white focus:outline-none focus:border-amber-500 text-sm" placeholder="Digite seu usuário">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Usuário / E-mail *</label>
-                    <input type="text" id="userInput" value="sace26" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-saceGold">
+                    <label class="block text-xs uppercase tracking-wider text-gray-400 mb-1">Senha de Acesso</label>
+                    <input type="password" id="passInput" class="w-full bg-saceDark border border-saceBorder rounded px-3 py-2 text-white focus:outline-none focus:border-amber-500 text-sm" placeholder="••••••••">
                 </div>
-                <div>
-                    <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Senha *</label>
-                    <input type="password" id="passInput" value="12345678" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-saceGold">
-                </div>
-                <button onclick="fazerLogin()" class="w-full bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold py-3.5 rounded-lg transition shadow-lg shadow-saceGold/10">
-                    Acessar SACE (Servidor Local)
+                <button onclick="fazerLogin()" class="w-full bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold py-2.5 rounded transition-colors text-sm uppercase tracking-wider mt-2">
+                    Acessar SACE
                 </button>
-            </div>
-            <div class="text-xs text-gray-500 flex justify-between items-center">
-                <span>Painel Operacional v3.0 Real API</span>
-                <span>Governança & Filiais</span>
-            </div>
-        </div>
-        <div class="hidden lg:flex lg:w-7/12 relative bg-cover bg-center" style="background-image: linear-gradient(to right, #0B0F19, rgba(11, 15, 25, 0.4)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1470&auto=format&fit=crop');">
-            <div class="absolute bottom-12 left-12 max-w-lg">
-                <span class="bg-black/60 text-saceGold text-xs font-bold px-3 py-1 rounded border border-saceGold/30">Painel Operacional v3.0 Real API</span>
-                <h2 class="text-3xl font-bold text-white mt-3">Governança, Splits & Filiais Integradas ao SQLite</h2>
             </div>
         </div>
     </div>
 
-    <!-- APLICAÇÃO PRINCIPAL -->
-    <div id="appContainer" class="hidden min-h-screen flex flex-col">
-        <!-- HEADER -->
-        <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center sticky top-0 z-40">
+    <!-- PAINEL OPERACIONAL PRINCIPAL (Oculto inicialmente) -->
+    <div id="appContainer" class="hidden">
+        <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center">
             <div>
-                <h1 class="text-xl font-bold text-white flex items-center gap-3">
-                    SACE — Sistema Auditado de Conformidade Extrajudicial
-                    <span class="text-xs font-normal bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Servidor Conectado (:5000)
-                    </span>
-                </h1>
-                <p class="text-xs text-gray-400 mt-0.5">Painel Operacional Avançado | Arquiteto Master: <span class="text-saceGold font-medium">Gênio</span></p>
+                <h1 class="text-xl font-bold text-white">SACE — Sistema Auditado de Conformidade Extrajudicial</h1>
+                <p class="text-xs text-gray-400">Painel Operacional Avançado | Arquiteto Master: Gênio</p>
             </div>
-            <button onclick="fazerLogout()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-semibold px-4 py-2 rounded-lg transition">
+            <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded text-xs font-semibold tracking-wider uppercase transition-colors">
                 Sair / Lock
             </button>
         </header>
 
-        <!-- CONTEÚDO PRINCIPAL -->
-        <main class="flex-1 p-6 max-w-7xl mx-auto w-full space-y-6">
-
-            <!-- TOPO: MÓDULO COMERCIAL & CENTRAL DE INTELIGÊNCIA -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- MÓDULO COMERCIAL -->
-                <section class="bg-saceCard border border-saceBorder rounded-2xl p-4 shadow-xl">
-                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoComercial()">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-saceGold/10 border border-saceGold/20 flex items-center justify-center text-saceGold text-sm">
-                                <i class="fa-solid fa-briefcase"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-sm font-bold text-white">Módulo Comercial & Propostas REURB (Banco de Dados)</h2>
-                                <p class="text-[11px] text-gray-400">Gerencie propostas comerciais na API.</p>
-                            </div>
-                        </div>
-                        <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded transition" id="btnToggleComercial">Expandir ▼</button>
-                    </div>
-                    <div id="painelComercial" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <input type="text" id="propCliente" placeholder="Nome do Cliente" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
-                            <input type="text" id="propImovel" placeholder="Descrição do Imóvel" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
-                            <input type="number" id="propValor" value="3700" class="bg-saceDark border border-saceBorder rounded px-3 py-1.5 text-xs text-white">
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <button onclick="salvarProposta()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold px-4 py-2 rounded text-xs transition">Salvar Proposta no Banco</button>
-                            <span id="statusProposta" class="text-xs text-emerald-400 font-medium"></span>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- CENTRAL DE INTELIGÊNCIA -->
-                <section class="bg-saceCard border border-saceBorder rounded-2xl p-4 shadow-xl">
-                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoInteligencia()">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-sm">
-                                <i class="fa-solid fa-lightbulb"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-sm font-bold text-white">Central de Inteligência: Splits Dinâmicos & BI</h2>
-                                <p class="text-[11px] text-gray-400">Métricas analíticas de conformidade.</p>
-                            </div>
-                        </div>
-                        <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-2.5 py-1 rounded transition" id="btnToggleInteligencia">Expandir ▼</button>
-                    </div>
-                    <div id="painelInteligencia" class="hidden mt-4 pt-4 border-t border-saceBorder text-xs text-gray-300 space-y-2">
-                        <p>Índice geral de conversão REURB na comarca: <span class="text-saceGold font-bold">88.4%</span></p>
-                        <p>Tempo médio de saneamento documental: <span class="text-emerald-400 font-bold">4.2 dias</span></p>
-                    </div>
-                </section>
-            </div>
-
-            <!-- GRADE SUPERIOR: PORTAL DE ENTRADA & SIMULADOR -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- COLUNA ESQUERDA -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- PORTAL DE ENTRADA -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <i class="fa-regular fa-file-lines text-saceGold"></i> 1. Portal de Entrada & IA Detetive
-                            </h2>
-                            <span class="text-xs text-gray-400" id="statusUploadLabel">PDF, Contratos e Certidões</span>
-                        </div>
-                        <div onclick="document.getElementById('fileInputReal').click()" class="border-2 border-dashed border-saceBorder hover:border-saceGold/50 rounded-xl p-8 text-center transition cursor-pointer bg-saceDark/50">
-                            <input type="file" id="fileInputReal" class="hidden" accept=".pdf,.doc,.docx,.png,.jpg" onchange="processarArquivoIA(event)">
-                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-gray-500 mb-2"></i>
-                            <p class="text-sm text-gray-300">Arraste seu PDF ou <span class="text-saceGold underline font-medium">clique para selecionar</span></p>
-                            <p class="text-xs text-gray-500 mt-1">A IA varrerá o contrato em busca de ausências de outorga, GEO e CAR instantaneamente.</p>
-                        </div>
-                    </section>
-
-                    <!-- DIAGNÓSTICO DE RISCOS -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-magnifying-glass text-saceGold"></i> 2. Diagnóstico de Riscos & Saneamento
-                            </h2>
-                            <button onclick="limparDiagnosticoESimulador()" class="text-xs text-red-400 hover:text-red-300 transition">Limpar Tudo</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm">
-                                <thead>
-                                    <tr class="border-b border-saceBorder text-gray-400 text-xs uppercase">
-                                        <th class="pb-3 font-semibold w-4/12">DOCUMENTO / MÓDULO</th>
-                                        <th class="pb-3 font-semibold w-2/12">STATUS</th>
-                                        <th class="pb-3 font-semibold w-6/12">DIAGNÓSTICO ALGORÍTMICO</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabelaDiagnostico" class="divide-y divide-saceBorder/50 text-xs">
-                                    <tr>
-                                        <td class="py-3.5 text-gray-200 font-medium">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
-                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-red-500/10 text-red-400 border border-red-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Crítico</span></td>
-                                        <td class="py-3.5 text-gray-400">Ausência de outorga uxória/marital identificada na cláusula 3ª.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3.5 text-gray-200 font-medium">Georreferenciamento</td>
-                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Conforme</span></td>
-                                        <td class="py-3.5 text-gray-400">Coordenadas SIRGAS2000 validadas com polígono SIGEF.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-3.5 text-gray-200 font-medium">Cadastro Ambiental</td>
-                                        <td class="py-3.5"><span class="inline-flex items-center justify-center bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2.5 py-0.5 rounded text-[11px] font-bold">Atenção</span></td>
-                                        <td class="py-3.5 text-gray-400">CAR pendente de validação definitiva no órgão estadual.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <!-- FÁBRICA DE PEÇAS OFICIAIS & MINUTAS -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-bolt text-saceGold"></i> 3. Fábrica de Peças Oficiais & Minutas
-                            </h2>
-                            <span class="text-xs text-gray-400">Automação Jurídica</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-saceDark border border-saceBorder p-4 rounded-xl">
-                                <h3 class="text-sm font-bold text-white mb-1">Requerimento de Retificação (REURB)</h3>
-                                <p class="text-xs text-gray-400 mb-3">Gera a petição oficial pronta para protocolo em cartório com os dados extraídos.</p>
-                                <button onclick="alert('Gerando minuta oficial em Word (.doc)...')" class="bg-saceBorder hover:bg-gray-700 text-saceGold font-semibold text-xs px-3 py-2 rounded-lg transition w-full">Gerar Minuta em Word (.doc)</button>
-                            </div>
-                            <div class="bg-saceDark border border-saceBorder p-4 rounded-xl">
-                                <h3 class="text-sm font-bold text-white mb-1">Contrato de Parceria Técnica</h3>
-                                <p class="text-xs text-gray-400 mb-3">Minuta contratual de prestação de serviços de topografia com divisão de honorários.</p>
-                                <button onclick="alert('Gerando contrato em Word (.doc)...')" class="bg-saceBorder hover:bg-gray-700 text-saceGold font-semibold text-xs px-3 py-2 rounded-lg transition w-full">Gerar Contrato (.doc)</button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- CADASTROS PERMANENTES DE MÚLTIPLOS PARCEIROS -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-folder-open text-saceGold"></i> Cadastros Permanentes de Múltiplos Parceiros:
-                            </h2>
-                        </div>
-                        <div class="flex flex-wrap gap-3 mb-6">
-                            <button onclick="abrirModalParceiro('Advogado')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
-                                <i class="fa-solid fa-scale-balanced"></i> Cadastrar Advogado
-                            </button>
-                            <button onclick="abrirModalParceiro('Topógrafo')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
-                                <i class="fa-solid fa-mountain-sun"></i> Cadastrar Topógrafo
-                            </button>
-                            <button onclick="abrirModalParceiro('Contabilidade')" class="bg-saceBorder hover:bg-gray-700 text-saceGold border border-saceGold/30 text-xs font-bold px-4 py-2.5 rounded-lg transition flex items-center gap-2">
-                                <i class="fa-solid fa-calculator"></i> Cadastrar Contabilidade
-                            </button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead>
-                                    <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                        <th class="py-2.5 px-3">Tipo</th>
-                                        <th class="py-2.5 px-3">Nome / Empresa</th>
-                                        <th class="py-2.5 px-3">Registro</th>
-                                        <th class="py-2.5 px-3">Contato</th>
-                                        <th class="py-2.5 px-3">Split</th>
-                                        <th class="py-2.5 px-3">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabelaParceirosBody" class="divide-y divide-saceBorder/50">
-                                    <tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum parceiro cadastrado ainda.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
+        <main class="max-w-7xl mx-auto p-6 space-y-6">
+            <!-- SEÇÃO DE CADASTROS E FILIAIS -->
+            <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-bold text-white">Master Filiais (Gestão de Filiais, Pessoal & Credenciais)</h2>
+                    <button onclick="abrirModalFuncionario()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-colors">
+                        + Cadastrar Novo Funcionário / Filial
+                    </button>
                 </div>
-
-                <!-- COLUNA DIREITA: SIMULADOR & DISPAROS -->
-                <div class="space-y-6">
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-base font-bold text-white flex items-center gap-2">
-                                <i class="fa-solid fa-calculator text-saceGold"></i> 5. Simulador de Custos & Splits
-                            </h2>
-                            <button onclick="zerarSimulador()" class="text-xs text-red-400 hover:underline">Zerar</button>
-                        </div>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Comarca / Região (Filial)</label>
-                                <select id="comarcaSelect" onchange="calcularOrcamento()" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
-                                    <option value="matriz">Distrito Federal (Matriz - TJDFT)</option>
-                                    <option value="goias">Entorno do DF / Goiás (TJGO)</option>
-                                    <option value="sp">São Paulo (Capital - TJSP)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Área do Imóvel (m²)</label>
-                                <input type="number" id="areaInput" value="10000" oninput="calcularOrcamento()" class="w-full bg-saceDark border border-saceBorder rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-saceGold">
-                            </div>
-                            <div class="pt-3 border-t border-saceBorder space-y-2 text-sm">
-                                <div class="flex justify-between text-gray-400">
-                                    <span>Emolumentos Cartório:</span>
-                                    <span id="lblEmolumentos" class="text-white font-medium">R$ 1.200,00</span>
-                                </div>
-                                <div class="flex justify-between text-gray-400">
-                                    <span>Topografia & RTK:</span>
-                                    <span id="lblTopografia" class="text-white font-medium">R$ 2.500,00</span>
-                                </div>
-                                <div class="flex justify-between text-base font-bold pt-2 border-t border-saceBorder">
-                                    <span class="text-white">Total Orçado:</span>
-                                    <span id="lblTotal" class="text-saceGold font-extrabold">R$ 3.700,00</span>
-                                </div>
-                            </div>
-
-                            <!-- DIVISÃO DE HONORÁRIOS -->
-                            <div class="pt-4 border-t border-saceBorder space-y-3">
-                                <p class="text-xs font-bold uppercase tracking-wider text-saceGold">Divisão de Honorários (Editável %):</p>
-                                <div class="space-y-2.5 text-xs">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-400 flex items-center gap-1.5">Advocacia (<input type="number" id="pctAdv" value="35" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
-                                        <span id="valAdv" class="text-white font-semibold">R$ 1.295,00</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-400 flex items-center gap-1.5">Topografia (<input type="number" id="pctTopo" value="50" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
-                                        <span id="valTopo" class="text-white font-semibold">R$ 1.850,00</span>
-                                    </div>
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-gray-400 flex items-center gap-1.5">Contabilidade (<input type="number" id="pctCont" value="15" oninput="calcularOrcamento()" class="w-12 text-center bg-saceDark border border-saceBorder rounded text-white py-0.5">%)</span>
-                                        <span id="valCont" class="text-white font-semibold">R$ 555,00</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button onclick="efetuarPagamentoESplit()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-lg text-sm transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-shield-halved"></i> Efetuar Pagamento Seguro & Disparar PDF
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- CENTRAL DE DISPAROS RÁPIDOS -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl">
-                        <h2 class="text-base font-bold text-white flex items-center gap-2 mb-4">
-                            <i class="fa-solid fa-rocket text-saceGold"></i> 6. Central de Disparos Rápidos
-                        </h2>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button onclick="dispararWhatsApp()" class="bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold py-2.5 rounded-lg transition flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-                            </button>
-                            <button onclick="dispararTelegram()" class="bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-bold py-2.5 rounded-lg transition flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-telegram text-sm"></i> Telegram
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- RADAR SACE (ESCUTA DF & GO EM PARALELO) -->
-                    <section class="bg-saceCard border border-saceBorder rounded-2xl p-6 shadow-xl space-y-4">
-                        <h2 class="text-base font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-satellite-dish text-saceGold"></i> 7. Radar SACE (Escuta DF & GO)
-                        </h2>
-                        <div class="bg-saceDark border border-saceBorder rounded-xl p-3.5 border-l-4 border-l-saceGold space-y-2">
-                            <div class="flex justify-between text-xs">
-                                <span class="font-bold text-white">EDITAL DE REGULARIZAÇÃO — DF</span>
-                                <span class="text-[10px] text-gray-400">Há 15 minutos • GDF Oficial</span>
-                            </div>
-                            <p class="text-xs text-gray-300">Secretaria de Habitação publica diretrizes para parcelamento no Paranoá.</p>
-                        </div>
-                        <div class="bg-saceDark border border-saceBorder rounded-xl p-3.5 border-l-4 border-l-cyan-500 space-y-2">
-                            <div class="flex justify-between text-xs">
-                                <span class="font-bold text-white">PLANO DIRETOR — GOIÁS (Entorno)</span>
-                                <span class="text-[10px] text-gray-400">Há 42 minutos • TJGO / AGEHAB</span>
-                            </div>
-                            <p class="text-xs text-gray-300">Novas diretrizes de regularização fundiária urbana integradas para os municípios goianos limítrofes.</p>
-                        </div>
-                        <div class="bg-saceDark border border-saceBorder rounded-xl p-3.5 border-l-4 border-l-amber-500 space-y-2">
-                            <div class="flex justify-between text-xs">
-                                <span class="font-bold text-white">ALERTA CARTORÁRIO — DF/GO</span>
-                                <span class="text-[10px] text-gray-400">Hoje, 08:30 • TJDFT / TJGO</span>
-                            </div>
-                            <p class="text-xs text-gray-300">Cartórios de Registro de Imóveis atualizam exigências unificadas para outorgas em condomínios da região metropolitana.</p>
-                        </div>
-                    </section>
-                </div>
-            </div>
-
-            <!-- SEÇÃO INFERIOR: MASTER FILIAIS -->
-            <section class="bg-saceCard border border-saceBorder rounded-2xl p-5 shadow-xl">
-                <div class="flex justify-between items-center cursor-pointer" onclick="toggleSecaoMasterFiliais()">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-saceGold/10 border border-saceGold/20 flex items-center justify-center text-saceGold">
-                            <i class="fa-solid fa-landmark"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-base font-bold text-white">Master Filiais (Gestão de Filiais, Pessoal & Credenciais)</h2>
-                            <p class="text-xs text-gray-400">Controle total de acessos regionais e equipe.</p>
-                        </div>
-                    </div>
-                    <button class="text-xs bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded-lg transition" id="btnToggleMasterFiliais">Expandir ▼</button>
-                </div>
-                <div id="painelMasterFiliais" class="hidden mt-6 pt-6 border-t border-saceBorder space-y-4">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-saceGold">Painel Master: Filiais e Pessoal (Banco de Dados)</h3>
-                        <button onclick="abrirModalFuncionario()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold text-xs px-3.5 py-2 rounded-lg transition">+ Cadastrar Novo Funcionário / Filial</button>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead>
-                                <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                    <th class="p-3">Filial / Cidade</th>
-                                    <th class="p-3">Funcionário / Cargo</th>
-                                    <th class="p-3">Endereço Completo</th>
-                                    <th class="p-3">Remuneração</th>
-                                    <th class="p-3">Senha</th>
-                                    <th class="p-3">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabelaMasterBody" class="divide-y divide-saceBorder/50">
-                                <tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-saceBorder text-gray-400 uppercase">
+                                <th class="p-3">Cargo / Tipo</th>
+                                <th class="p-3">Nome / Filial</th>
+                                <th class="p-3">Cidade</th>
+                                <th class="p-3">Endereço Completo</th>
+                                <th class="p-3">Remuneração</th>
+                                <th class="p-3">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaMasterBody" class="divide-y divide-saceBorder/50">
+                            <tr>
+                                <td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- SCRIPT DE CONTROLE (MANTEVE TODA A LÓGICA ANTERIOR) -->
+    <!-- SCRIPT DE CONTROLE E INTEGRAÇÃO COM A API -->
     <script>
         function fazerLogin() {
             const user = document.getElementById('userInput').value;
@@ -414,6 +99,7 @@
             if(user && pass) {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('appContainer').classList.remove('hidden');
+                atualizarTabelasSACE();
             } else {
                 alert('Preencha os campos de acesso.');
             }
@@ -424,133 +110,68 @@
             document.getElementById('loginScreen').classList.remove('hidden');
         }
 
-        function toggleSecaoComercial() {
-            const painel = document.getElementById('painelComercial');
-            const btn = document.getElementById('btnToggleComercial');
-            painel.classList.toggle('hidden');
-            btn.textContent = painel.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
+        function abrirModalFuncionario() {
+            const nome = prompt("Nome do Funcionário / Filial:");
+            const cargo = prompt("Cargo / Tipo (ex: Advogado, Filial DF):");
+            const cidade = prompt("Cidade:");
+            const valorRem = prompt("Valor da Remuneração (ex: 2500,00):");
+            const endereco = prompt("Endereço Completo:");
 
-        function toggleSecaoInteligencia() {
-            const painel = document.getElementById('painelInteligencia');
-            const btn = document.getElementById('btnToggleInteligencia');
-            painel.classList.toggle('hidden');
-            btn.textContent = painel.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function toggleSecaoMasterFiliais() {
-            const painel = document.getElementById('painelMasterFiliais');
-            const btn = document.getElementById('btnToggleMasterFiliais');
-            painel.classList.toggle('hidden');
-            btn.textContent = painel.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function salvarProposta() {
-            document.getElementById('statusProposta').textContent = 'Proposta salva com sucesso na API SQLite!';
-            setTimeout(() => { document.getElementById('statusProposta').textContent = ''; }, 3000);
-        }
-
-        function processarArquivoIA(event) {
-            const file = event.target.files[0];
-            if(file) {
-                document.getElementById('statusUploadLabel').textContent = 'Arquivo processado pela IA: ' + file.name;
-                alert('Documento analisado com sucesso! Riscos mapeados automaticamente.');
+            if (nome && cargo) {
+                fetch('/api/equipe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome, cargo, cidade, valorRem, endereco })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Cadastrado com sucesso!");
+                    atualizarTabelasSACE();
+                })
+                .catch(err => alert("Erro ao cadastrar: " + err));
             }
         }
 
-        function limparDiagnosticoESimulador() {
-            alert('Diagnóstico limpo.');
+        async function atualizarTabelasSACE() {
+            try {
+                const resposta = await fetch('/api/equipe');
+                const lista = await resposta.json();
+                
+                const corpoTabela = document.getElementById('tabelaMasterBody');
+                if (corpoTabela && lista.length > 0) {
+                    corpoTabela.innerHTML = '';
+                    lista.forEach(item => {
+                        const linha = document.createElement('tr');
+                        linha.innerHTML = `
+                            <td class="p-3 font-semibold text-amber-500">${item.cargo || 'Filial/Parceiro'}</td>
+                            <td class="p-3">${item.nome || ''}</td>
+                            <td class="p-3">${item.cidade || ''}</td>
+                            <td class="p-3 text-gray-400">${item.endereco || ''}</td>
+                            <td class="p-3">R$ ${item.valorRem || '0,00'}</td>
+                            <td class="p-3"><button onclick="deletarCadastro(${item.id})" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded">Excluir</button></td>
+                        `;
+                        corpoTabela.appendChild(linha);
+                    });
+                }
+            } catch (e) {
+                console.log("Erro ao atualizar tabelas:", e);
+            }
         }
 
-        function calcularOrcamento() {
-            const area = parseFloat(document.getElementById('areaInput').value) || 0;
-            const comarca = document.getElementById('comarcaSelect').value;
-            
-            let baseEmolumentos = 1200;
-            if(comarca === 'goias') baseEmolumentos = 950;
-            if(comarca === 'sp') baseEmolumentos = 2200;
-
-            const topografia = area * 0.25;
-            const total = baseEmolumentos + topografia;
-
-            document.getElementById('lblEmolumentos').textContent = 'R$ ' + baseEmolumentos.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('lblTopografia').textContent = 'R$ ' + topografia.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('lblTotal').textContent = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-
-            const pctAdv = parseFloat(document.getElementById('pctAdv').value) || 0;
-            const pctTopo = parseFloat(document.getElementById('pctTopo').value) || 0;
-            const pctCont = parseFloat(document.getElementById('pctCont').value) || 0;
-
-            document.getElementById('valAdv').textContent = 'R$ ' + ((total * pctAdv) / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('valTopo').textContent = 'R$ ' + ((total * pctTopo) / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('valCont').textContent = 'R$ ' + ((total * pctCont) / 100).toLocaleString('pt-BR', {minimumFractionDigits: 2});
+        async function deletarCadastro(id) {
+            if (confirm("Tem certeza que deseja remover este registro?")) {
+                await fetch(`/api/equipe/${id}`, { method: 'DELETE' });
+                atualizarTabelasSACE();
+            }
         }
 
-        function zerarSimulador() {
-            document.getElementById('areaInput').value = 0;
-            calcularOrcamento();
-        }
-
-        function efetuarPagamentoESplit() {
-            alert('Pagamento processado com segurança via gateway e repasse por split disparado para os parceiros.');
-        }
-
-        function dispararWhatsApp() {
-            alert('Mensagem enviada com sucesso via WhatsApp API.');
-        }
-
-        function dispararTelegram() {
-            alert('Alerta disparado com sucesso no canal do Telegram.');
-        }
-
-        function abrirModalParceiro(tipo) {
-            alert('Abrindo modal de cadastro para: ' + tipo);
-        }
-
-        function abrirModalFuncionario() {
-            alert('Abrindo modal de cadastro de funcionário/filial.');
-// Função para buscar os cadastros do servidor e preencher as tabelas na tela
-async function atualizarTabelasSACE() {
-    try {
-        const resposta = await fetch('/api/equipe');
-        const lista = await resposta.json();
-        
-        console.log("Equipe/Parceiros carregados:", lista);
-        
-        // Seleciona o corpo da tabela de parceiros/filiais se existir na página
-        const corpoTabela = document.querySelector('table tbody');
-        if (corpoTabela && lista.length > 0) {
-            corpoTabela.innerHTML = ''; // Limpa a tabela
-            lista.forEach(item => {
-                const linha = document.createElement('tr');
-                linha.innerHTML = `
-                    <td>${item.cargo || 'Filial/Parceiro'}</td>
-                    <td>${item.nome || ''}</td>
-                    <td>${item.cidade || ''}</td>
-                    <td>${item.endereco || ''}</td>
-                    <td>R$ ${item.valorRem || '0,00'}</td>
-                    <td><button onclick="deletarCadastro(${item.id})" style="background:red; color:white; border:none; padding:3px 8px; cursor:pointer;">Excluir</button></td>
-                `;
-                corpoTabela.appendChild(linha);
-            });
-        }
-    } catch (e) {
-        console.log("Erro ao atualizar tabelas:", e);
-    }
-}
-
-// Função para excluir um cadastro do banco via API
-async function deletarCadastro(id) {
-    if (confirm("Tem certeza que deseja remover este registro?")) {
-        await fetch(`/api/equipe/${id}`, { method: 'DELETE' });
-        atualizarTabelasSACE();
-    }
-}
-
-// Executa a busca assim que a página carrega
-window.addEventListener('DOMContentLoaded', () => {
-    atualizarTabelasSACE();
-});
+        // Garante que o painel principal comece oculto, exigindo login
+        window.addEventListener('DOMContentLoaded', () => {
+            const appContainer = document.getElementById('appContainer');
+            if (appContainer) {
+                appContainer.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
