@@ -97,7 +97,7 @@
             <div class="flex items-center space-x-3">
                 <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (PEDE SENHA) -->
                 <button onclick="solicitarSenhaMaster()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
-                    <span>🎥 Sala Suprema 60 Slots</span>
+                    <span>🎥 Sala Master 30 Canais</span>
                 </button>
                 <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
                     Sair / Lock
@@ -266,7 +266,7 @@
 
                 </div>
 
-                <!-- Coluna Direita (Simulador e Disparos & Radar) -->
+                <!-- Coluna Direita (Simulador e Disparos & Radar & Caixa de Entrada) -->
                 <div class="space-y-6">
                     
                     <!-- 5. Simulador de Custos & Splits -->
@@ -336,6 +336,52 @@
                         </div>
                     </section>
 
+                    <!-- 8. Caixa de Entrada de Orçamentos dos Clientes (NOVO) -->
+                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl transition-all">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="bg-amber-500/10 p-2.5 rounded-lg text-amber-500">📥</div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+                                        <span>Caixa de Entrada de Orçamentos</span>
+                                        <span id="badgeQtdOrcamentos" class="bg-amber-500 text-saceDark text-[10px] font-black px-2 py-0.5 rounded-full">3</span>
+                                    </h3>
+                                    <p class="text-xs text-gray-400">Mensagens de clientes solicitando propostas REURB.</p>
+                                </div>
+                            </div>
+                            <button onclick="toggleCaixaOrcamentos()" id="btnToggleOrcamentos" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
+                        </div>
+                        <div id="conteudoOrcamentos" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-3">
+                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>Cliente: Carlos Alberto</span>
+                                    <span class="text-emerald-400">R$ 12.500,00</span>
+                                </div>
+                                <p class="text-gray-400">Imóvel localizado no Paranoá Parque - Pedido de orçamento REURB completo.</p>
+                                <span class="text-[10px] text-amber-500">Recebido há 12 minutos via WhatsApp SACE</span>
+                            </div>
+                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>Cliente: Mariana Souza</span>
+                                    <span class="text-emerald-400">R$ 8.900,00</span>
+                                </div>
+                                <p class="text-gray-400">Retificação de área rural - Entorno de Goiás.</p>
+                                <span class="text-[10px] text-amber-500">Recebido há 45 minutos via Portal</span>
+                            </div>
+                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
+                                <div class="flex justify-between font-bold text-white">
+                                    <span>Cliente: Roberto Mendes</span>
+                                    <span class="text-emerald-400">R$ 15.000,00</span>
+                                </div>
+                                <p class="text-gray-400">Regularização lote comercial - Taguatinga.</p>
+                                <span class="text-[10px] text-amber-500">Recebido há 2 horas via Telegram</span>
+                            </div>
+                            <button onclick="abrirModalCaixaOrcamentos()" class="w-full bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold uppercase tracking-wider transition-colors">
+                                Ver Painel Completo de Orçamentos
+                            </button>
+                        </div>
+                    </section>
+
                 </div>
             </div>
 
@@ -382,7 +428,7 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- SALA DE MONITORAMENTO SUPREMA — 60 SLOTS   -->
+    <!-- SALA DE MONITORAMENTO SUPREMA — 30 SLOTS   -->
     <!-- ========================================== -->
     <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-[#07090f] flex flex-col overflow-hidden">
         
@@ -391,7 +437,7 @@
             <div class="flex items-center space-x-3">
                 <span class="text-pink-500 font-black tracking-widest text-sm uppercase flex items-center space-x-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
-                    <span>👁️ SALA DE MONITORAMENTO SUPREMA — 60 SLOTS</span>
+                    <span>Reunião Master Brasília 30 Canais Simultâneos</span>
                 </span>
             </div>
             <div>
@@ -401,11 +447,12 @@
             </div>
         </header>
 
-        <!-- CORPO DO MONITORAMENTO COM 3 COLUNAS (Esquerda: 1 a 30, Centro: Monitor Principal, Direita: 31 a 60) -->
+        <!-- CORPO DO MONITORAMENTO COM 3 COLUNAS (Esquerda: 1 a 15, Centro: Monitor Principal, Direita: 16 a 30) -->
         <div class="flex-1 flex overflow-hidden p-4 gap-4">
             
-            <!-- COLUNA ESQUERDA: SLOTS 1 a 30 (Com Scroll) -->
-            <div class="w-72 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+            <!-- COLUNA ESQUERDA: SLOTS 1 a 15 (Quadrados e Compactos com Scroll) -->
+            <div class="w-64 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+                <div class="text-[10px] uppercase font-bold text-gray-400 mb-1 px-1">Canais Setor A (1 - 15)</div>
                 <div id="colunaSlotsEsquerda" class="space-y-2">
                     <!-- Gerado via Script -->
                 </div>
@@ -439,12 +486,13 @@
                 </div>
 
                 <div class="text-center text-[11px] text-gray-500 uppercase tracking-widest z-10 pt-2 border-t border-saceBorder">
-                    Asgard Mainframe Security Core Active • 60 Canais Simultâneos
+                    SACE Mainframe Security Core Active • Reunião Master Brasília 30 Canais Simultâneos
                 </div>
             </div>
 
-            <!-- COLUNA DIREITA: SLOTS 31 a 60 (Com Scroll) -->
-            <div class="w-72 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+            <!-- COLUNA DIREITA: SLOTS 16 a 30 (Quadrados e Compactos com Scroll) -->
+            <div class="w-64 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
+                <div class="text-[10px] uppercase font-bold text-gray-400 mb-1 px-1">Canais Setor B (16 - 30)</div>
                 <div id="colunaSlotsDireita" class="space-y-2">
                     <!-- Gerado via Script -->
                 </div>
@@ -458,11 +506,52 @@
         <div class="bg-saceCard border border-amber-500/50 rounded-xl p-6 w-full max-w-sm shadow-2xl space-y-4 text-center">
             <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto text-amber-400 text-xl font-bold">🔒</div>
             <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acesso Restrito Master</h3>
-            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Sala de Monitoramento Suprema.</p>
+            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Reunião Master Brasília.</p>
             <input type="password" id="inputSenhaMaster" placeholder="Senha Master" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-center text-white text-sm focus:outline-none focus:border-amber-500">
             <div class="flex space-x-2 pt-2">
                 <button onclick="fecharSenhaMaster()" class="flex-1 bg-saceBorder hover:bg-gray-700 text-gray-300 py-2 rounded text-xs font-bold">Cancelar</button>
                 <button onclick="validarSenhaMaster()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-saceDark py-2 rounded text-xs font-black uppercase">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DA CAIXA DE ENTRADA DE ORÇAMENTOS -->
+    <div id="modalCaixaOrcamentos" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div class="bg-saceCard border border-saceBorder rounded-xl p-6 w-full max-w-lg shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
+                <h3 class="text-sm font-bold text-white uppercase flex items-center space-x-2">
+                    <span>📥 Caixa de Entrada Completa - Orçamentos</span>
+                </h3>
+                <button onclick="fecharModalCaixaOrcamentos()" class="text-gray-400 hover:text-white font-bold">✕</button>
+            </div>
+            <div class="space-y-3 text-xs max-h-80 overflow-y-auto">
+                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
+                    <div class="flex justify-between font-bold text-white">
+                        <span>Cliente: Carlos Alberto</span>
+                        <span class="text-emerald-400">R$ 12.500,00</span>
+                    </div>
+                    <p class="text-gray-400">Imóvel localizado no Paranoá Parque - Pedido de orçamento REURB completo.</p>
+                    <span class="text-[10px] text-amber-500">Recebido há 12 minutos via WhatsApp SACE</span>
+                </div>
+                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
+                    <div class="flex justify-between font-bold text-white">
+                        <span>Cliente: Mariana Souza</span>
+                        <span class="text-emerald-400">R$ 8.900,00</span>
+                    </div>
+                    <p class="text-gray-400">Retificação de área rural - Entorno de Goiás.</p>
+                    <span class="text-[10px] text-amber-500">Recebido há 45 minutos via Portal</span>
+                </div>
+                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
+                    <div class="flex justify-between font-bold text-white">
+                        <span>Cliente: Roberto Mendes</span>
+                        <span class="text-emerald-400">R$ 15.000,00</span>
+                    </div>
+                    <p class="text-gray-400">Regularização lote comercial - Taguatinga.</p>
+                    <span class="text-[10px] text-amber-500">Recebido há 2 horas via Telegram</span>
+                </div>
+            </div>
+            <div class="flex justify-end pt-4 border-t border-saceBorder">
+                <button onclick="fecharModalCaixaOrcamentos()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded text-xs font-bold uppercase">Fechar</button>
             </div>
         </div>
     </div>
@@ -539,44 +628,44 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CONTROLE E GERENCIAMENTO DOS 60 SLOTS -->
+    <!-- SCRIPT DE CONTROLE E GERENCIAMENTO DOS 30 SLOTS -->
     <script>
         let tipoParceiroAtual = 'Advogado';
         let slotSelecionadoAtual = null;
 
-        // Gerar os 60 slots automaticamente nas colunas laterais
+        // Gerar exatamente 15 slots de cada lado (Total: 30) em formato quadrado compacto
         window.addEventListener('DOMContentLoaded', () => {
             const containerEsquerda = document.getElementById('colunaSlotsEsquerda');
             const containerDireita = document.getElementById('colunaSlotsDireita');
 
-            // Slots 1 a 30 (Esquerda)
-            for(let i = 1; i <= 30; i++) {
+            // Slots 1 a 15 (Esquerda)
+            for(let i = 1; i <= 15; i++) {
                 const div = document.createElement('div');
-                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2 cursor-pointer transition-all flex justify-between items-center';
+                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2.5 cursor-pointer transition-all flex flex-col justify-between aspect-square';
                 div.id = `slot-${i}`;
                 div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
                 div.innerHTML = `
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-200">Slot ${i}</div>
-                        <div class="text-[9px] text-gray-500 uppercase" id="status-slot-${i}">OFFLINE</div>
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold text-gray-200">Slot ${i}</span>
+                        <span class="w-2 h-2 rounded-full bg-gray-600 mt-0.5" id="indicator-slot-${i}"></span>
                     </div>
-                    <span class="w-2 h-2 rounded-full bg-gray-600" id="indicator-slot-${i}"></span>
+                    <div class="text-[9px] text-gray-500 uppercase truncate" id="status-slot-${i}">OFFLINE</div>
                 `;
                 containerEsquerda.appendChild(div);
             }
 
-            // Slots 31 a 60 (Direita)
-            for(let i = 31; i <= 60; i++) {
+            // Slots 16 a 30 (Direita)
+            for(let i = 16; i <= 30; i++) {
                 const div = document.createElement('div');
-                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2 cursor-pointer transition-all flex justify-between items-center';
+                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2.5 cursor-pointer transition-all flex flex-col justify-between aspect-square';
                 div.id = `slot-${i}`;
                 div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
                 div.innerHTML = `
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-200">Slot ${i}</div>
-                        <div class="text-[9px] text-gray-500 uppercase" id="status-slot-${i}">OFFLINE</div>
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold text-gray-200">Slot ${i}</span>
+                        <span class="w-2 h-2 rounded-full bg-gray-600 mt-0.5" id="indicator-slot-${i}"></span>
                     </div>
-                    <span class="w-2 h-2 rounded-full bg-gray-600" id="indicator-slot-${i}"></span>
+                    <div class="text-[9px] text-gray-500 uppercase truncate" id="status-slot-${i}">OFFLINE</div>
                 `;
                 containerDireita.appendChild(div);
             }
@@ -592,8 +681,8 @@
             const indEl = document.getElementById(`indicator-slot-${num}`);
             if(statusEl && indEl) {
                 statusEl.innerText = nome;
-                statusEl.className = 'text-[9px] text-emerald-400 font-bold';
-                indEl.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+                statusEl.className = 'text-[9px] text-emerald-400 font-bold truncate';
+                indEl.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse mt-0.5';
             }
         }
 
@@ -620,8 +709,8 @@
             const statusEl = document.getElementById(`status-slot-${slotSelecionadoAtual}`);
             const indEl = document.getElementById(`indicator-slot-${slotSelecionadoAtual}`);
             statusEl.innerText = 'OFFLINE';
-            statusEl.className = 'text-[9px] text-gray-500 uppercase';
-            indEl.className = 'w-2 h-2 rounded-full bg-gray-600';
+            statusEl.className = 'text-[9px] text-gray-500 uppercase truncate';
+            indEl.className = 'w-2 h-2 rounded-full bg-gray-600 mt-0.5';
             alert(`Slot ${slotSelecionadoAtual} desconectado.`);
         }
 
@@ -681,6 +770,21 @@
             const btn = document.getElementById('btnToggleBI');
             conteudo.classList.toggle('hidden');
             btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+        }
+
+        function toggleCaixaOrcamentos() {
+            const conteudo = document.getElementById('conteudoOrcamentos');
+            const btn = document.getElementById('btnToggleOrcamentos');
+            conteudo.classList.toggle('hidden');
+            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
+        }
+
+        function abrirModalCaixaOrcamentos() {
+            document.getElementById('modalCaixaOrcamentos').classList.remove('hidden');
+        }
+
+        function fecharModalCaixaOrcamentos() {
+            document.getElementById('modalCaixaOrcamentos').classList.add('hidden');
         }
 
         function toggleMasterFiliais() {
