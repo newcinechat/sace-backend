@@ -509,7 +509,48 @@
 
         function abrirModalFuncionario() {
             alert('Abrindo modal de cadastro de funcionário/filial.');
+// Função para buscar os cadastros do servidor e preencher as tabelas na tela
+async function atualizarTabelasSACE() {
+    try {
+        const resposta = await fetch('/api/equipe');
+        const lista = await resposta.json();
+        
+        console.log("Equipe/Parceiros carregados:", lista);
+        
+        // Seleciona o corpo da tabela de parceiros/filiais se existir na página
+        const corpoTabela = document.querySelector('table tbody');
+        if (corpoTabela && lista.length > 0) {
+            corpoTabela.innerHTML = ''; // Limpa a tabela
+            lista.forEach(item => {
+                const linha = document.createElement('tr');
+                linha.innerHTML = `
+                    <td>${item.cargo || 'Filial/Parceiro'}</td>
+                    <td>${item.nome || ''}</td>
+                    <td>${item.cidade || ''}</td>
+                    <td>${item.endereco || ''}</td>
+                    <td>R$ ${item.valorRem || '0,00'}</td>
+                    <td><button onclick="deletarCadastro(${item.id})" style="background:red; color:white; border:none; padding:3px 8px; cursor:pointer;">Excluir</button></td>
+                `;
+                corpoTabela.appendChild(linha);
+            });
         }
+    } catch (e) {
+        console.log("Erro ao atualizar tabelas:", e);
+    }
+}
+
+// Função para excluir um cadastro do banco via API
+async function deletarCadastro(id) {
+    if (confirm("Tem certeza que deseja remover este registro?")) {
+        await fetch(`/api/equipe/${id}`, { method: 'DELETE' });
+        atualizarTabelasSACE();
+    }
+}
+
+// Executa a busca assim que a página carrega
+window.addEventListener('DOMContentLoaded', () => {
+    atualizarTabelasSACE();
+});
     </script>
 </body>
 </html>
