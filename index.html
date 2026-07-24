@@ -3,924 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SACE — Sistema Auditado de Conformidade Extrajudicial</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        saceDark: '#0b0f19',
-                        saceCard: '#111827',
-                        saceBorder: '#1f2937',
-                        saceGold: '#d97706',
-                        saceGoldHover: '#b45309'
-                    }
-                }
-            }
+    <title>SACE — Painel Nacional Unificado</title>
+    <style>
+        :root {
+            --bg-dark: #0A0E17;
+            --card-bg: #131B2E;
+            --accent-gold: #F59E0B;
+            --accent-green: #10B981;
+            --text-main: #F3F4F6;
+            --text-muted: #9CA3AF;
+            --border-color: #1F2937;
         }
-    </script>
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1, h3 {
+            color: var(--accent-gold);
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #0A0E17;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background: var(--accent-gold);
+            color: #0A0E17;
+            font-weight: bold;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-danger {
+            background: #EF4444;
+            color: #FFF;
+        }
+    </style>
 </head>
-<body class="bg-saceDark text-gray-100 font-sans antialiased min-h-screen selection:bg-amber-500 selection:text-black">
+<body>
 
-    <!-- ========================================== -->
-    <!-- TELA DE LOGIN CORPORATIVA                  -->
-    <!-- ========================================== -->
-    <div id="loginScreen" class="fixed inset-0 z-50 flex bg-saceDark">
-        <div class="w-full lg:w-5/12 p-8 lg:p-16 flex flex-col justify-between border-r border-saceBorder bg-saceDark z-10">
-            <div>
-                <div class="flex items-center space-x-3 mb-12">
-                    <div class="bg-saceGold/10 border border-saceGold/30 p-2 rounded-lg">
-                        <svg class="w-6 h-6 text-saceGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <div>
-                        <span class="text-xs uppercase tracking-widest text-amber-500 font-bold px-2 py-0.5 bg-amber-500/10 rounded">Ambiente Seguro v3.0</span>
-                        <h1 class="text-2xl font-black text-white tracking-wider mt-1">SACE</h1>
-                    </div>
-                </div>
-                <p class="text-xs text-gray-400 uppercase tracking-widest mb-8">Sistema Auditado de Conformidade Extrajudicial</p>
-
-                <div class="space-y-5">
-                    <div class="bg-saceCard/50 border border-saceBorder p-3 rounded-lg text-xs text-gray-300 flex items-center space-x-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>Olá, Gênio. Acesso seguro liberado.</span>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-semibold">Usuário / E-mail *</label>
-                        <input type="text" id="userInput" value="sace26" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-sm tracking-wider">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs uppercase tracking-wider text-gray-400 mb-2 font-semibold">Senha *</label>
-                        <input type="password" id="passInput" value="********" class="w-full bg-saceCard border border-saceBorder rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-sm tracking-wider">
-                    </div>
-
-                    <button onclick="fazerLogin()" class="w-full bg-saceGold hover:bg-saceGoldHover text-saceDark font-extrabold py-3.5 rounded-lg transition-all text-sm uppercase tracking-wider shadow-lg shadow-amber-600/20">
-                        Acessar SACE (Servidor Local)
-                    </button>
-                </div>
+<div class="container">
+    <h1>🏛️ SACE — Sistema de Automação e Controle Extrajudicial</h1>
+    
+    <!-- MÓDULO 1: PORTAL DE ENTRADA & IA DETETIVE (UPLOAD DO CLIENTE) -->
+    <div class="card">
+        <h3>1. Portal de Entrada & IA Detetive (Envio de Contrato)</h3>
+        <form id="form-upload-cliente" onsubmit="enviarPdfParaIA(event)">
+            <div class="form-group">
+                <label>Seu Nome Completo</label>
+                <input type="text" id="cli_nome" required placeholder="Ex: Maria Souza">
             </div>
-
-            <div class="text-xs text-gray-500 flex justify-between pt-6 border-t border-saceBorder/50">
-                <span>Painel Operacional v3.0 Real API</span>
-                <span>Governança & Filiais</span>
+            <div class="form-group">
+                <label>Seu E-mail de Contato</label>
+                <input type="email" id="cli_email" required placeholder="exemplo@email.com">
             </div>
+            <div class="form-group">
+                <label>Arquivo do Contrato (PDF)</label>
+                <input type="file" id="cli_pdf" accept="application/pdf" required style="padding: 8px;">
+            </div>
+            <button type="submit" class="btn" style="width: 100%; background: var(--accent-green); margin-top: 10px;">
+                ENVIAR PDF PARA ANÁLISE DA IA DETETIVE
+            </button>
+        </form>
+        <div id="status-analise" style="margin-top: 10px; font-size: 0.85rem; color: var(--accent-gold);"></div>
+    </div>
+
+    <!-- MÓDULO 2: LANÇAMENTO DE ORÇAMENTO (FILIAL) -->
+    <div class="card">
+        <h3>📤 Lançar Novo Orçamento (Filial)</h3>
+        <div class="form-group">
+            <label>Nome do Cliente / Lead</label>
+            <input type="text" id="lead_nome" placeholder="Ex: João da Silva">
         </div>
+        <div class="form-group">
+            <label>Tipo de Serviço (REURB, Outorga, etc)</label>
+            <input type="text" id="lead_servico" placeholder="Ex: REURB-S Paranoá">
+        </div>
+        <div class="form-group">
+            <label>Valor Estimado</label>
+            <input type="text" id="lead_valor" placeholder="Ex: R$ 4.500,00">
+        </div>
+        <button class="btn" style="width: 100%; background: var(--accent-green);" onclick="enviarNovoOrcamento()">
+            ENVIAR PARA CAIXA DE ENTRADA SACE
+        </button>
+    </div>
 
-        <div class="hidden lg:flex lg:w-7/12 relative overflow-hidden items-end p-16">
-            <div class="absolute inset-0 bg-gradient-to-t from-saceDark via-saceDark/40 to-transparent z-10"></div>
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity filter contrast-125">
-            <div class="relative z-20 max-w-xl">
-                <span class="text-xs uppercase tracking-widest text-amber-500 font-bold px-2.5 py-1 bg-amber-500/10 rounded border border-amber-500/20">Painel Operacional v3.0 Real API</span>
-                <h2 class="text-3xl font-bold text-white mt-3 tracking-tight">Governança, Splits & Filiais Integradas ao SQLite</h2>
-                <p class="text-xs text-gray-400 mt-2 leading-relaxed">Controle total de conformidade jurídica, simulação de honorários e gestão unificada da equipe no Brasil.</p>
-            </div>
+    <!-- MÓDULO 3: CAIXA DE ENTRADA REAL COM CONTADOR DINÂMICO -->
+    <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="margin: 0;">📥 Caixa de Entrada de Orçamentos</h3>
+            <span id="contador-caixa" style="background: rgba(245, 158, 11, 0.1); color: var(--accent-gold); padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;">
+                0 Mensagens
+            </span>
+        </div>
+        <div id="lista-orcamentos" style="max-height: 300px; overflow-y: auto; padding-right: 5px;">
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Nenhum orçamento recebido ainda...</p>
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAINEL OPERACIONAL PRINCIPAL               -->
-    <!-- ========================================== -->
-    <div id="appContainer" class="hidden">
-        <header class="bg-saceCard border-b border-saceBorder px-6 py-4 flex justify-between items-center sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
-            <div class="flex items-center space-x-4">
-                <div>
-                    <h1 class="text-xl font-bold text-white flex items-center space-x-2">
-                        <span>SACE — Sistema Auditado de Conformidade Extrajudicial</span>
-                        <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-normal">● Servidor Conectado (:5000)</span>
-                    </h1>
-                    <p class="text-xs text-gray-400">Painel Operacional Avançado | Arquiteto Master: Gênio (ACSantos)</p>
-                </div>
+    <!-- MÓDULO 4: RELATÓRIOS SACE NACIONAL (EXCLUSIVO CEO / MASTER) -->
+    <div class="card" style="border-color: var(--accent-gold);">
+        <h3>🔒 Relatórios SACE Nacional (Auditoria Fiscal & Histórico)</h3>
+        <div id="painel-login-nacional">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Área restrita ao gestor Master. Insira a senha para carregar o histórico consolidado de todas as filiais.</p>
+            <div style="display: flex; gap: 10px;">
+                <input type="password" id="senha-master" placeholder="Senha Master SACE" style="max-width: 250px;">
+                <button class="btn" onclick="verificarAcessoNacional()">Desbloquear Relatório</button>
             </div>
-            
-            <div class="flex items-center space-x-3">
-                <!-- BOTÃO ESTRATÉGICO DA SALA MASTER (PEDE SENHA) -->
-                <button onclick="solicitarSenhaMaster()" class="bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-saceDark px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-600/30 flex items-center space-x-2 border border-amber-400/40 animate-pulse">
-                    <span>🎥 Sala Master 30 Canais</span>
-                </button>
-                <button onclick="fazerLogout()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-colors shadow-lg">
-                    Sair / Lock
-                </button>
+        </div>
+
+        <div id="conteudo-nacional" style="display: none; margin-top: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="color: var(--accent-green); font-size: 0.9rem;">● Acesso Autorizado — Banco de Dados Consolidado</span>
+                <button class="btn btn-danger" style="padding: 5px 10px; font-size: 0.75rem;" onclick="bloquearPainelNacional()">Bloquear Tela</button>
             </div>
-        </header>
-
-        <main class="max-w-7xl mx-auto p-6 space-y-6">
-            
-            <!-- TOPO: MÓDULOS DE SUPORTE -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div id="blocoComercial" class="bg-saceCard border border-saceBorder rounded-xl p-4 shadow-md transition-all">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-amber-500/10 p-2.5 rounded-lg text-amber-500">📁</div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">Módulo Comercial & Propostas REURB (Banco de Dados)</h3>
-                                <p class="text-xs text-gray-400">Gerencie propostas comerciais na API.</p>
-                            </div>
-                        </div>
-                        <button onclick="toggleComercial()" id="btnToggleComercial" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
-                    </div>
-                    <div id="conteudoComercial" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-3">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            <input type="text" id="propCliente" placeholder="Nome do Cliente" class="bg-saceDark border border-saceBorder rounded p-2 text-xs text-white">
-                            <input type="text" id="propImovel" placeholder="Descrição do Imóvel" class="bg-saceDark border border-saceBorder rounded p-2 text-xs text-white">
-                            <input type="number" id="propValor" placeholder="Valor (R$)" class="bg-saceDark border border-saceBorder rounded p-2 text-xs text-white">
-                        </div>
-                        <button onclick="salvarProposta()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark font-bold px-4 py-2 rounded text-xs uppercase tracking-wider">Salvar Proposta no Banco</button>
-                    </div>
-                </div>
-
-                <div id="blocoBI" class="bg-saceCard border border-saceBorder rounded-xl p-4 shadow-md transition-all">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <div class="bg-purple-500/10 p-2.5 rounded-lg text-purple-400">📊</div>
-                            <div>
-                                <h3 class="text-sm font-bold text-white">Central de Inteligência: Splits Dinâmicos & BI</h3>
-                                <p class="text-xs text-gray-400">Métricas analíticas de conformidade.</p>
-                            </div>
-                        </div>
-                        <button onclick="toggleBI()" id="btnToggleBI" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
-                    </div>
-                    <div id="conteudoBI" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-2 text-xs text-gray-300">
-                        <p>Índice geral de conversão REURB na comarca: <span class="font-bold text-emerald-400">88.4%</span></p>
-                        <p>Tempo médio de saneamento documental: <span class="font-bold text-amber-500">4.2 dias</span></p>
-                    </div>
-                </div>
+            <div style="max-height: 350px; overflow-y: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid var(--border-color); color: var(--accent-gold);">
+                            <th style="padding: 8px;">Data/Hora</th>
+                            <th style="padding: 8px;">Filial / Origem</th>
+                            <th style="padding: 8px;">Cliente</th>
+                            <th style="padding: 8px;">Serviço</th>
+                            <th style="padding: 8px;">Valor</th>
+                            <th style="padding: 8px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-historico-nacional">
+                        <!-- Preenchido dinamicamente via Socket.io -->
+                    </tbody>
+                </table>
             </div>
-
-            <!-- GRID PRINCIPAL DE MÓDULOS -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                
-                <!-- Coluna Esquerda & Centro (2 colunas) -->
-                <div class="lg:col-span-2 space-y-6">
-                    
-                    <!-- 1. Portal de Entrada & IA Detetive -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center space-x-2">
-                                <span>⚡ 1. Portal de Entrada & IA Detetive</span>
-                            </h2>
-                            <span class="text-xs text-gray-400">PDF, Contratos e Certidões</span>
-                        </div>
-                        <div onclick="abrirSeletorArquivo()" class="border-2 border-dashed border-saceBorder rounded-xl p-8 text-center bg-saceDark/50 hover:border-amber-500/50 transition-colors cursor-pointer">
-                            <div class="text-3xl mb-2">☁️</div>
-                            <p class="text-sm text-gray-300">Arraste seu PDF ou <span class="text-amber-500 underline font-semibold">clique para selecionar</span></p>
-                            <p class="text-xs text-gray-500 mt-1">A IA varrerá o contrato em busca de ausências de outorga, GEO e CAR instantaneamente.</p>
-                        </div>
-                    </section>
-
-                    <!-- 2. Diagnóstico de Riscos & Saneamento -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">🔍 2. Diagnóstico de Riscos & Saneamento</h2>
-                            <button onclick="limparDiagnostico()" class="text-xs text-red-400 hover:underline">Limpar Tudo</button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead>
-                                    <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                        <th class="p-3">Documento / Módulo</th>
-                                        <th class="p-3">Status</th>
-                                        <th class="p-3">Diagnóstico Algorítmico</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabelaDiagnostico" class="divide-y divide-saceBorder/50">
-                                    <tr>
-                                        <td class="p-3 text-gray-200">Modelo de Teste SACE - Contrato e Orçamento REURB Paranoá.pdf</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-bold">Crítico</span></td>
-                                        <td class="p-3 text-gray-400">Ausência de outorga uxória/marital identificada na cláusula 3ª.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-gray-200">Georreferenciamento</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold">Conforme</span></td>
-                                        <td class="p-3 text-gray-400">Coordenadas SIRGAS2000 validadas com polígono SIGEF.</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-gray-200">Cadastro Ambiental</td>
-                                        <td class="p-3"><span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 text-xs font-bold">Atenção</span></td>
-                                        <td class="p-3 text-gray-400">CAR pendente de validação definitiva no órgão estadual.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <!-- 3. Fábrica de Peças Oficiais & Minutas -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">⚡ 3. Fábrica de Peças Oficiais & Minutas</h2>
-                            <span class="text-xs text-gray-400">Automação Jurídica</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-saceDark/60 border border-saceBorder p-4 rounded-xl flex flex-col justify-between">
-                                <div>
-                                    <h4 class="text-xs font-bold text-white uppercase">Requerimento de Retificação (REURB)</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Gera a petição oficial pronta para protocolo em cartório com os dados extraídos.</p>
-                                </div>
-                                <button onclick="alert('Gerando minuta em Word (.doc)...')" class="mt-4 bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold transition-colors">Gerar Minuta em Word (.doc)</button>
-                            </div>
-                            <div class="bg-saceDark/60 border border-saceBorder p-4 rounded-xl flex flex-col justify-between">
-                                <div>
-                                    <h4 class="text-xs font-bold text-white uppercase">Contrato de Parceria Técnica</h4>
-                                    <p class="text-xs text-gray-400 mt-1">Minuta contratual de prestação de serviços de topografia com divisão de honorários.</p>
-                                </div>
-                                <button onclick="alert('Gerando contrato em Word (.doc)...')" class="mt-4 bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold transition-colors">Gerar Contrato (.doc)</button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Cadastros Permanentes de Múltiplos Parceiros -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">📂 Cadastros Permanentes de Múltiplos Parceiros:</h2>
-                        </div>
-                        <div class="flex flex-wrap gap-3 mb-4">
-                            <button onclick="abrirModalParceiro('Advogado')" class="bg-saceDark border border-saceBorder hover:border-amber-500 text-gray-200 px-4 py-2 rounded-lg text-xs font-bold flex items-center space-x-2">
-                                <span class="text-amber-500">⚖️</span><span>Cadastrar Advogado</span>
-                            </button>
-                            <button onclick="abrirModalParceiro('Topógrafo')" class="bg-saceDark border border-saceBorder hover:border-amber-500 text-gray-200 px-4 py-2 rounded-lg text-xs font-bold flex items-center space-x-2">
-                                <span class="text-amber-500">📐</span><span>Cadastrar Topógrafo</span>
-                            </button>
-                            <button onclick="abrirModalParceiro('Contabilidade')" class="bg-saceDark border border-saceBorder hover:border-amber-500 text-gray-200 px-4 py-2 rounded-lg text-xs font-bold flex items-center space-x-2">
-                                <span class="text-amber-500">📊</span><span>Cadastrar Contabilidade</span>
-                            </button>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-left text-xs">
-                                <thead>
-                                    <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                        <th class="p-3">TIPO</th>
-                                        <th class="p-3">NOME / EMPRESA</th>
-                                        <th class="p-3">REGISTRO</th>
-                                        <th class="p-3">CONTATO</th>
-                                        <th class="p-3">SPLIT</th>
-                                        <th class="p-3">AÇÕES</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabelaParceirosBody">
-                                    <tr><td colspan="6" class="p-4 text-center text-gray-500">Nenhum parceiro cadastrado ainda.</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                </div>
-
-                <!-- Coluna Direita (Simulador e Disparos & Radar & Caixa de Entrada) -->
-                <div class="space-y-6">
-                    
-                    <!-- 5. Simulador de Custos & Splits -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-bold text-white uppercase tracking-wider">🧮 5. Simulador de Custos & Splits</h2>
-                            <button onclick="zerarSimulador()" class="text-xs text-red-400 hover:underline">Zerar</button>
-                        </div>
-                        <div class="space-y-4 text-xs">
-                            <div>
-                                <label class="block text-gray-400 mb-1 uppercase">Comarca / Região (Filial)</label>
-                                <select id="selectComarca" class="w-full bg-saceDark border border-saceBorder rounded p-2 text-white">
-                                    <option>Distrito Federal (Matriz - TJDFT)</option>
-                                    <option>Entorno / Goiás (TJGO)</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-gray-400 mb-1 uppercase">Área do Imóvel (m²)</label>
-                                <input type="number" id="inputArea" value="0" oninput="calcularSimulador()" class="w-full bg-saceDark border border-saceBorder rounded p-2 text-white">
-                            </div>
-                            <div class="pt-3 border-t border-saceBorder space-y-2 text-gray-300">
-                                <div class="flex justify-between"><span>Emolumentos Cartório:</span><span id="resCartorio" class="font-bold text-white">R$ 0,00</span></div>
-                                <div class="flex justify-between"><span>Topografia & RTK:</span><span id="resTopo" class="font-bold text-white">R$ 0,00</span></div>
-                                <div class="flex justify-between text-sm pt-2 border-t border-saceBorder font-black text-amber-500"><span>Total Orçado:</span><span id="resTotal">R$ 0,00</span></div>
-                            </div>
-                            <div class="pt-3 border-t border-saceBorder space-y-3">
-                                <p class="font-bold text-gray-400 uppercase">Divisão de Honorários (Editável %):</p>
-                                <div class="flex justify-between items-center"><span>Advocacia (35%)</span><span id="resAdv" class="font-bold text-white">R$ 0,00</span></div>
-                                <div class="flex justify-between items-center"><span>Topografia (50%)</span><span id="resTopog" class="font-bold text-white">R$ 0,00</span></div>
-                                <div class="flex justify-between items-center"><span>Contabilidade (15%)</span><span id="resContab" class="font-bold text-white">R$ 0,00</span></div>
-                            </div>
-                            <button onclick="efetuarPagamento()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-lg transition-colors uppercase tracking-wider shadow-lg mt-2">
-                                ✔ Efetuar Pagamento Seguro & Disparar PDF
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- 6. Central de Disparos Rápidos -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                        <h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4">🚀 6. Central de Disparos Rápidos</h2>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button onclick="dispararWhatsApp()" class="bg-emerald-900/40 border border-emerald-600/40 hover:bg-emerald-900/60 text-emerald-300 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-2">
-                                <span>💬 WhatsApp</span>
-                            </button>
-                            <button onclick="dispararTelegram()" class="bg-sky-900/40 border border-sky-600/40 hover:bg-sky-900/60 text-sky-300 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-2">
-                                <span>✈ Telegram</span>
-                            </button>
-                        </div>
-                    </section>
-
-                    <!-- 7. Radar SACE (Escuta DF & GO) -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl space-y-4">
-                        <h2 class="text-sm font-bold text-white uppercase tracking-wider">📡 7. Radar SACE (Escuta DF & GO)</h2>
-                        <div class="bg-saceDark/50 border border-saceBorder p-3 rounded-lg">
-                            <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                <span class="font-bold text-amber-500">EDITAL DE REGULARIZAÇÃO</span>
-                                <span>Há 15 minutos • GDF Oficial</span>
-                            </div>
-                            <p class="text-xs text-gray-200">Secretaria de Habitação publica diretrizes para parcelamento no Paranoá.</p>
-                        </div>
-                        <div class="bg-saceDark/50 border border-saceBorder p-3 rounded-lg">
-                            <div class="flex justify-between text-xs text-gray-400 mb-1">
-                                <span class="font-bold text-amber-500">ALERTA CARTORÁRIO GO</span>
-                                <span>Hoje, 08:30 • TJGO</span>
-                            </div>
-                            <p class="text-xs text-gray-200">Comarca de Valparaíso/GO atualiza exigências para retificação georreferenciada.</p>
-                        </div>
-                    </section>
-
-                    <!-- 8. Caixa de Entrada de Orçamentos dos Clientes (NOVO) -->
-                    <section class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl transition-all">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center space-x-3">
-                                <div class="bg-amber-500/10 p-2.5 rounded-lg text-amber-500">📥</div>
-                                <div>
-                                    <h3 class="text-sm font-bold text-white flex items-center space-x-2">
-                                        <span>Caixa de Entrada de Orçamentos</span>
-                                        <span id="badgeQtdOrcamentos" class="bg-amber-500 text-saceDark text-[10px] font-black px-2 py-0.5 rounded-full">3</span>
-                                    </h3>
-                                    <p class="text-xs text-gray-400">Mensagens de clientes solicitando propostas REURB.</p>
-                                </div>
-                            </div>
-                            <button onclick="toggleCaixaOrcamentos()" id="btnToggleOrcamentos" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-1.5 rounded text-xs font-semibold">Expandir ▼</button>
-                        </div>
-                        <div id="conteudoOrcamentos" class="hidden mt-4 pt-4 border-t border-saceBorder space-y-3">
-                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
-                                <div class="flex justify-between font-bold text-white">
-                                    <span>Cliente: Carlos Alberto</span>
-                                    <span class="text-emerald-400">R$ 12.500,00</span>
-                                </div>
-                                <p class="text-gray-400">Imóvel localizado no Paranoá Parque - Pedido de orçamento REURB completo.</p>
-                                <span class="text-[10px] text-amber-500">Recebido há 12 minutos via WhatsApp SACE</span>
-                            </div>
-                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
-                                <div class="flex justify-between font-bold text-white">
-                                    <span>Cliente: Mariana Souza</span>
-                                    <span class="text-emerald-400">R$ 8.900,00</span>
-                                </div>
-                                <p class="text-gray-400">Retificação de área rural - Entorno de Goiás.</p>
-                                <span class="text-[10px] text-amber-500">Recebido há 45 minutos via Portal</span>
-                            </div>
-                            <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg text-xs space-y-1">
-                                <div class="flex justify-between font-bold text-white">
-                                    <span>Cliente: Roberto Mendes</span>
-                                    <span class="text-emerald-400">R$ 15.000,00</span>
-                                </div>
-                                <p class="text-gray-400">Regularização lote comercial - Taguatinga.</p>
-                                <span class="text-[10px] text-amber-500">Recebido há 2 horas via Telegram</span>
-                            </div>
-                            <button onclick="abrirModalCaixaOrcamentos()" class="w-full bg-saceBorder hover:bg-gray-700 text-gray-200 py-2 rounded text-xs font-bold uppercase tracking-wider transition-colors">
-                                Ver Painel Completo de Orçamentos
-                            </button>
-                        </div>
-                    </section>
-
-                </div>
-            </div>
-
-            <!-- ========================================== -->
-            <!-- MASTER FILIAIS: GESTÃO INTEGRADA           -->
-            <!-- ========================================== -->
-            <section id="secaoMasterFiliais" class="bg-saceCard border border-saceBorder rounded-xl p-6 shadow-xl">
-                <div class="flex justify-between items-center mb-4">
-                    <div>
-                        <h2 class="text-base font-bold text-white flex items-center space-x-2">
-                            <span>🏛️ Master Filiais (Gestão de Filiais, Pessoal & Credenciais)</span>
-                        </h2>
-                        <p class="text-xs text-gray-400">Controle total de acessos regionais (DF & GO) e equipe salvos diretamente no banco de dados.</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button onclick="abrirModalFuncionario()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-lg">
-                            + Cadastrar Novo Funcionário / Filial
-                        </button>
-                        <button onclick="toggleMasterFiliais()" id="btnRecolherMaster" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-3 py-2 rounded-lg text-xs font-semibold">Recolher ▲</button>
-                    </div>
-                </div>
-                <div id="corpoMasterFiliais" class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead>
-                            <tr class="border-b border-saceBorder text-gray-400 uppercase">
-                                <th class="p-3">FILIAL / CIDADE</th>
-                                <th class="p-3">FUNCIONÁRIO / CARGO</th>
-                                <th class="p-3">ENDEREÇO COMPLETO</th>
-                                <th class="p-3">REMUNERAÇÃO</th>
-                                <th class="p-3">SENHA</th>
-                                <th class="p-3">AÇÕES</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabelaMasterBody" class="divide-y divide-saceBorder/50">
-                            <tr>
-                                <td colspan="6" class="p-4 text-center text-gray-500">Nenhum funcionário ou filial cadastrada.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-        </main>
+        </div>
     </div>
+</div>
 
-    <!-- ========================================== -->
-    <!-- SALA DE MONITORAMENTO SUPREMA — 30 SLOTS   -->
-    <!-- ========================================== -->
-    <div id="salaMasterModal" class="hidden fixed inset-0 z-50 bg-[#07090f] flex flex-col overflow-hidden">
+<!-- Scripts de Conexão em Tempo Real (Socket.IO) -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+
+    // 1. Envio do PDF do Cliente para a IA Detetive
+    async function enviarPdfParaIA(event) {
+        event.preventDefault();
         
-        <!-- HEADER DO PAINEL SUPREMO -->
-        <header class="bg-[#0b0f19] border-b border-saceBorder px-6 py-3 flex justify-between items-center z-20 shrink-0">
-            <div class="flex items-center space-x-3">
-                <span class="text-pink-500 font-black tracking-widest text-sm uppercase flex items-center space-x-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-ping"></span>
-                    <span>Reunião Master Brasília 30 Canais Simultâneos</span>
-                </span>
-            </div>
-            <div>
-                <button onclick="fecharSalaMasterModal()" class="bg-pink-600 hover:bg-pink-700 text-white px-5 py-1.5 rounded text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-pink-600/30">
-                    FECHAR ✕
-                </button>
-            </div>
-        </header>
+        const nome = document.getElementById('cli_nome').value;
+        const email = document.getElementById('cli_email').value;
+        const fileInput = document.getElementById('cli_pdf').files[0];
+        const statusDiv = document.getElementById('status-analise');
 
-        <!-- CORPO DO MONITORAMENTO COM 3 COLUNAS (Esquerda: 1 a 15, Centro: Monitor Principal, Direita: 16 a 30) -->
-        <div class="flex-1 flex overflow-hidden p-4 gap-4">
-            
-            <!-- COLUNA ESQUERDA: SLOTS 1 a 15 (Quadrados e Compactos com Scroll) -->
-            <div class="w-64 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
-                <div class="text-[10px] uppercase font-bold text-gray-400 mb-1 px-1">Canais Setor A (1 - 15)</div>
-                <div id="colunaSlotsEsquerda" class="space-y-2">
-                    <!-- Gerado via Script -->
-                </div>
-            </div>
+        if (!fileInput) {
+            alert("Gênio, selecione um arquivo PDF.");
+            return;
+        }
 
-            <!-- COLUNA CENTRAL: TELA DE TRANSMISSÃO FOCADA -->
-            <div class="flex-1 bg-[#111827] border-2 border-cyan-400/50 rounded-2xl flex flex-col justify-between p-6 relative shadow-2xl overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-b from-cyan-950/10 via-transparent to-pink-950/10 pointer-events-none"></div>
-                
-                <div class="flex justify-between items-center z-10">
-                    <span id="labelSlotAtivo" class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950/60 px-3 py-1 rounded border border-cyan-800/50">Nenhum slot selecionado</span>
-                    <div class="flex space-x-2">
-                        <button onclick="mutarSlotAtivo()" id="btnMuteAtivo" class="bg-saceDark hover:bg-gray-800 text-gray-300 text-xs px-3 py-1 rounded border border-saceBorder font-semibold">Mutar Slot</button>
-                        <button onclick="desconectarSlotAtivo()" class="bg-red-900/60 hover:bg-red-800 text-red-200 text-xs px-3 py-1 rounded border border-red-700 font-semibold">Desconectar</button>
-                    </div>
-                </div>
+        const formData = new FormData();
+        formData.append('nome', nome);
+        formData.append('email', email);
+        formData.append('pdfContrato', fileInput);
 
-                <div class="flex-1 my-6 flex flex-col items-center justify-center relative z-10">
-                    <div class="w-full max-w-2xl h-80 bg-gradient-to-tr from-pink-600 via-purple-600 to-indigo-600 rounded-2xl flex flex-col items-center justify-center shadow-2xl border border-pink-400/30 p-8 text-center relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-black/20"></div>
-                        <div class="relative z-10 space-y-4">
-                            <div class="w-16 h-16 rounded-2xl bg-black/40 border border-white/20 flex items-center justify-center mx-auto text-3xl shadow-inner">
-                                📺
-                            </div>
-                            <div>
-                                <h3 id="tituloTelaFocada" class="text-lg font-black text-white uppercase tracking-wider">SINAL DE TRANSMISSÃO FOCADA</h3>
-                                <p id="subTelaFocada" class="text-xs text-pink-100 mt-1">Selecione um slot ativo na barra lateral para interceptar a live do mentor ou filial.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        statusDiv.innerText = "⏳ Enviando PDF e acionando a IA Detetive...";
 
-                <div class="text-center text-[11px] text-gray-500 uppercase tracking-widest z-10 pt-2 border-t border-saceBorder">
-                    SACE Mainframe Security Core Active • Reunião Master Brasília 30 Canais Simultâneos
-                </div>
-            </div>
+        try {
+            const response = await fetch('/api/analisar-contrato', {
+                method: 'POST',
+                body: formData
+            });
 
-            <!-- COLUNA DIREITA: SLOTS 16 a 30 (Quadrados e Compactos com Scroll) -->
-            <div class="w-64 bg-[#0b0f19]/80 border border-saceBorder rounded-xl p-3 overflow-y-auto space-y-2 shrink-0">
-                <div class="text-[10px] uppercase font-bold text-gray-400 mb-1 px-1">Canais Setor B (16 - 30)</div>
-                <div id="colunaSlotsDireita" class="space-y-2">
-                    <!-- Gerado via Script -->
-                </div>
-            </div>
+            const resultado = await response.json();
 
-        </div>
-    </div>
-
-    <!-- MODAL DE SENHA MASTER -->
-    <div id="modalSenhaMaster" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="bg-saceCard border border-amber-500/50 rounded-xl p-6 w-full max-w-sm shadow-2xl space-y-4 text-center">
-            <div class="w-12 h-12 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center mx-auto text-amber-400 text-xl font-bold">🔒</div>
-            <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acesso Restrito Master</h3>
-            <p class="text-xs text-gray-400">Digite a senha de segurança para abrir a Reunião Master Brasília.</p>
-            <input type="password" id="inputSenhaMaster" placeholder="Senha Master" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-center text-white text-sm focus:outline-none focus:border-amber-500">
-            <div class="flex space-x-2 pt-2">
-                <button onclick="fecharSenhaMaster()" class="flex-1 bg-saceBorder hover:bg-gray-700 text-gray-300 py-2 rounded text-xs font-bold">Cancelar</button>
-                <button onclick="validarSenhaMaster()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-saceDark py-2 rounded text-xs font-black uppercase">Entrar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DA CAIXA DE ENTRADA DE ORÇAMENTOS -->
-    <div id="modalCaixaOrcamentos" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-        <div class="bg-saceCard border border-saceBorder rounded-xl p-6 w-full max-w-lg shadow-2xl space-y-4">
-            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
-                <h3 class="text-sm font-bold text-white uppercase flex items-center space-x-2">
-                    <span>📥 Caixa de Entrada Completa - Orçamentos</span>
-                </h3>
-                <button onclick="fecharModalCaixaOrcamentos()" class="text-gray-400 hover:text-white font-bold">✕</button>
-            </div>
-            <div class="space-y-3 text-xs max-h-80 overflow-y-auto">
-                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
-                    <div class="flex justify-between font-bold text-white">
-                        <span>Cliente: Carlos Alberto</span>
-                        <span class="text-emerald-400">R$ 12.500,00</span>
-                    </div>
-                    <p class="text-gray-400">Imóvel localizado no Paranoá Parque - Pedido de orçamento REURB completo.</p>
-                    <span class="text-[10px] text-amber-500">Recebido há 12 minutos via WhatsApp SACE</span>
-                </div>
-                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
-                    <div class="flex justify-between font-bold text-white">
-                        <span>Cliente: Mariana Souza</span>
-                        <span class="text-emerald-400">R$ 8.900,00</span>
-                    </div>
-                    <p class="text-gray-400">Retificação de área rural - Entorno de Goiás.</p>
-                    <span class="text-[10px] text-amber-500">Recebido há 45 minutos via Portal</span>
-                </div>
-                <div class="bg-saceDark/60 border border-saceBorder p-3 rounded-lg space-y-1">
-                    <div class="flex justify-between font-bold text-white">
-                        <span>Cliente: Roberto Mendes</span>
-                        <span class="text-emerald-400">R$ 15.000,00</span>
-                    </div>
-                    <p class="text-gray-400">Regularização lote comercial - Taguatinga.</p>
-                    <span class="text-[10px] text-amber-500">Recebido há 2 horas via Telegram</span>
-                </div>
-            </div>
-            <div class="flex justify-end pt-4 border-t border-saceBorder">
-                <button onclick="fecharModalCaixaOrcamentos()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded text-xs font-bold uppercase">Fechar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DINÂMICO DE PARCEIROS -->
-    <div id="modalParceiro" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-        <div class="bg-saceCard border border-saceBorder rounded-xl p-6 w-full max-w-lg shadow-2xl space-y-4">
-            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
-                <h3 id="modalParceiroTitulo" class="text-sm font-bold text-white uppercase">Cadastrar Parceiro</h3>
-                <button onclick="fecharModalParceiro()" class="text-gray-400 hover:text-white font-bold">✕</button>
-            </div>
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Nome Completo / Razão Social *</label>
-                    <input type="text" id="pNome" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Registro (OAB / CREA / CRC) *</label>
-                    <input type="text" id="pRegistro" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Telefone / WhatsApp *</label>
-                    <input type="text" id="pContato" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Endereço Completo *</label>
-                    <input type="text" id="pEndereco" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Percentual de Split Acordado (%) *</label>
-                    <input type="number" id="pSplit" value="35" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-            </div>
-            <div class="flex justify-end space-x-3 pt-4 border-t border-saceBorder">
-                <button onclick="fecharModalParceiro()" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-4 py-2 rounded text-xs font-bold">Cancelar</button>
-                <button onclick="salvarParceiroBanco()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded text-xs font-extrabold uppercase">Salvar Cadastro</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL DE FUNCIONÁRIO / FILIAL -->
-    <div id="modalFuncionario" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-        <div class="bg-saceCard border border-saceBorder rounded-xl p-6 w-full max-w-lg shadow-2xl space-y-4">
-            <div class="flex justify-between items-center border-b border-saceBorder pb-3">
-                <h3 class="text-sm font-bold text-white uppercase">Cadastrar Novo Funcionário / Filial</h3>
-                <button onclick="fecharModalFuncionario()" class="text-gray-400 hover:text-white font-bold">✕</button>
-            </div>
-            <div class="space-y-3 text-xs grid grid-cols-2 gap-3">
-                <div class="col-span-2">
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Filial / Cidade (DF ou GO) *</label>
-                    <input type="text" id="fFilial" placeholder="Ex: Matriz - Brasília/DF ou Entorno/GO" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div class="col-span-2">
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Funcionário / Cargo *</label>
-                    <input type="text" id="fCargo" placeholder="Ex: Ana Paula (Gerente)" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div class="col-span-2">
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Endereço Completo *</label>
-                    <input type="text" id="fEndereco" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Remuneração (R$) *</label>
-                    <input type="text" id="fRem" placeholder="5.500,00" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-                <div>
-                    <label class="block text-gray-400 mb-1 uppercase font-semibold">Senha de Acesso *</label>
-                    <input type="text" id="fSenha" placeholder="sace2026_df" class="w-full bg-saceDark border border-saceBorder rounded p-2.5 text-white">
-                </div>
-            </div>
-            <div class="flex justify-end space-x-3 pt-4 border-t border-saceBorder">
-                <button onclick="fecharModalFuncionario()" class="bg-saceBorder hover:bg-gray-700 text-gray-300 px-4 py-2 rounded text-xs font-bold">Cancelar</button>
-                <button onclick="salvarFuncionarioBanco()" class="bg-saceGold hover:bg-saceGoldHover text-saceDark px-4 py-2 rounded text-xs font-extrabold uppercase">Salvar Cadastro</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPT DE CONTROLE E GERENCIAMENTO DOS 30 SLOTS -->
-    <script>
-        let tipoParceiroAtual = 'Advogado';
-        let slotSelecionadoAtual = null;
-
-        // Gerar exatamente 15 slots de cada lado (Total: 30) em formato quadrado compacto
-        window.addEventListener('DOMContentLoaded', () => {
-            const containerEsquerda = document.getElementById('colunaSlotsEsquerda');
-            const containerDireita = document.getElementById('colunaSlotsDireita');
-
-            // Slots 1 a 15 (Esquerda)
-            for(let i = 1; i <= 15; i++) {
-                const div = document.createElement('div');
-                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2.5 cursor-pointer transition-all flex flex-col justify-between aspect-square';
-                div.id = `slot-${i}`;
-                div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <span class="text-[10px] font-bold text-gray-200">Slot ${i}</span>
-                        <span class="w-2 h-2 rounded-full bg-gray-600 mt-0.5" id="indicator-slot-${i}"></span>
-                    </div>
-                    <div class="text-[9px] text-gray-500 uppercase truncate" id="status-slot-${i}">OFFLINE</div>
-                `;
-                containerEsquerda.appendChild(div);
+            if (response.ok) {
+                statusDiv.innerHTML = `✅ ${resultado.mensagem}`;
+                document.getElementById('form-upload-cliente').reset();
+            } else {
+                statusDiv.innerHTML = `❌ Erro: ${resultado.erro}`;
             }
+        } catch (err) {
+            console.error(err);
+            statusDiv.innerHTML = "❌ Falha de comunicação com o servidor.";
+        }
+    }
 
-            // Slots 16 a 30 (Direita)
-            for(let i = 16; i <= 30; i++) {
-                const div = document.createElement('div');
-                div.className = 'bg-[#111827] border border-saceBorder hover:border-cyan-400/60 rounded p-2.5 cursor-pointer transition-all flex flex-col justify-between aspect-square';
-                div.id = `slot-${i}`;
-                div.onclick = () => selecionarSlot(i, `Filial / Canal SACE #${i}`);
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <span class="text-[10px] font-bold text-gray-200">Slot ${i}</span>
-                        <span class="w-2 h-2 rounded-full bg-gray-600 mt-0.5" id="indicator-slot-${i}"></span>
+    // 2. Envio de Orçamento da Filial
+    function enviarNovoOrcamento() {
+        const nome = document.getElementById('lead_nome').value;
+        const servico = document.getElementById('lead_servico').value;
+        const valor = document.getElementById('lead_valor').value || 'R$ 0,00';
+
+        if(!nome || !servico) {
+            alert("Gênio, preencha o Nome do Cliente e o Tipo de Serviço!");
+            return;
+        }
+
+        const dadosOrcamento = {
+            cliente: nome,
+            servico: servico,
+            valor: valor,
+            filial: 'Matriz / Distrito Federal'
+        };
+
+        socket.emit('novo_orcamento', dadosOrcamento);
+
+        document.getElementById('lead_nome').value = '';
+        document.getElementById('lead_servico').value = '';
+        document.getElementById('lead_valor').value = '';
+    }
+
+    // 3. Atualização em Tempo Real da Caixa de Entrada
+    socket.on('atualizar_caixa_entrada', function(listaDeOrcamentos) {
+        const containerLista = document.getElementById('lista-orcamentos');
+        const contadorBadge = document.getElementById('contador-caixa');
+        
+        // Atualiza o contador de mensagens dinamicamente com o valor real
+        contadorBadge.innerText = `${listaDeOrcamentos.length} Mensagem(ns)`;
+
+        if(listaDeOrcamentos.length === 0) {
+            containerLista.innerHTML = `<p style="color: var(--text-muted); font-size: 0.85rem;">Nenhum orçamento recebido ainda...</p>`;
+            return;
+        }
+
+        containerLista.innerHTML = '';
+
+        listaDeOrcamentos.forEach(orcamento => {
+            containerLista.innerHTML += `
+                <div style="background: #0A0E17; border-left: 4px solid var(--accent-gold); padding: 12px; margin-bottom: 10px; border-radius: 4px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <strong style="color: var(--text-main); font-size: 0.95rem;">${orcamento.cliente}</strong>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">${orcamento.dataHora}</span>
                     </div>
-                    <div class="text-[9px] text-gray-500 uppercase truncate" id="status-slot-${i}">OFFLINE</div>
-                `;
-                containerDireita.appendChild(div);
-            }
-
-            // Ativar alguns slots de exemplo para simulação realista
-            ativarSlotExemplo(1, 'Matriz Brasília/DF (CEO)');
-            ativarSlotExemplo(2, 'Filial Entorno GO');
-            ativarSlotExemplo(5, 'Processo Seletivo SACE');
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">
+                        <strong>Serviço:</strong> ${orcamento.servico} <br>
+                        <strong>Origem:</strong> ${orcamento.filial}
+                    </p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--accent-green); font-weight: bold; font-size: 0.9rem;">${orcamento.valor}</span>
+                        <span style="background: rgba(245, 158, 11, 0.1); color: var(--accent-gold); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem;">
+                            ${orcamento.status}
+                        </span>
+                    </div>
+                </div>
+            `;
         });
+    });
 
-        function ativarSlotExemplo(num, nome) {
-            const statusEl = document.getElementById(`status-slot-${num}`);
-            const indEl = document.getElementById(`indicator-slot-${num}`);
-            if(statusEl && indEl) {
-                statusEl.innerText = nome;
-                statusEl.className = 'text-[9px] text-emerald-400 font-bold truncate';
-                indEl.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse mt-0.5';
-            }
+    // 4. Funções de Controle do Relatório Nacional (Protegido por Senha)
+    function verificarAcessoNacional() {
+        const senha = document.getElementById('senha-master').value;
+        socket.emit('acessar_relatorio_nacional', { senha: senha });
+    }
+
+    function bloquearPainelNacional() {
+        document.getElementById('conteudo-nacional').style.display = 'none';
+        document.getElementById('painel-login-nacional').style.display = 'block';
+        document.getElementById('senha-master').value = '';
+    }
+
+    socket.on('autorizacao_nacional_concedida', function(historico) {
+        document.getElementById('painel-login-nacional').style.display = 'none';
+        document.getElementById('conteudo-nacional').style.display = 'block';
+        renderizarTabelaNacional(historico);
+    });
+
+    socket.on('erro_autorizacao', function(mensagem) {
+        alert(mensagem);
+    });
+
+    socket.on('atualizar_relatorio_nacional', function(historico) {
+        if(document.getElementById('conteudo-nacional').style.display === 'block') {
+            renderizarTabelaNacional(historico);
+        }
+    });
+
+    function renderizarTabelaNacional(historico) {
+        const tbody = document.getElementById('tabela-historico-nacional');
+        tbody.innerHTML = '';
+
+        if(historico.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="6" style="padding: 10px; color: var(--text-muted);">Nenhum registro fiscal encontrado.</td></tr>`;
+            return;
         }
 
-        function selecionarSlot(num, nome) {
-            slotSelecionadoAtual = num;
-            document.getElementById('labelSlotAtivo').innerText = `SLOT ${num} ATIVO — INTERCEPTANDO`;
-            document.getElementById('tituloTelaFocada').innerText = `TRANSMISSÃO AO VIVO: ${nome}`;
-            document.getElementById('subTelaFocada').innerText = `Canal conectado em tempo real com o servidor SACE Master.`;
-        }
-
-        function mutarSlotAtivo() {
-            if(!slotSelecionadoAtual) {
-                alert('Selecione um slot na lateral primeiro.');
-                return;
-            }
-            alert(`Áudio do Slot ${slotSelecionadoAtual} alternado.`);
-        }
-
-        function desconectarSlotAtivo() {
-            if(!slotSelecionadoAtual) {
-                alert('Selecione um slot na lateral primeiro.');
-                return;
-            }
-            const statusEl = document.getElementById(`status-slot-${slotSelecionadoAtual}`);
-            const indEl = document.getElementById(`indicator-slot-${slotSelecionadoAtual}`);
-            statusEl.innerText = 'OFFLINE';
-            statusEl.className = 'text-[9px] text-gray-500 uppercase truncate';
-            indEl.className = 'w-2 h-2 rounded-full bg-gray-600 mt-0.5';
-            alert(`Slot ${slotSelecionadoAtual} desconectado.`);
-        }
-
-        function fazerLogin() {
-            const user = document.getElementById('userInput').value;
-            const pass = document.getElementById('passInput').value;
-            if(user && pass) {
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('appContainer').classList.remove('hidden');
-            } else {
-                alert('Preencha os campos de acesso.');
-            }
-        }
-
-        function fazerLogout() {
-            document.getElementById('appContainer').classList.add('hidden');
-            document.getElementById('loginScreen').classList.remove('hidden');
-        }
-
-        function solicitarSenhaMaster() {
-            document.getElementById('modalSenhaMaster').classList.remove('hidden');
-            document.getElementById('inputSenhaMaster').value = '';
-        }
-
-        function fecharSenhaMaster() {
-            document.getElementById('modalSenhaMaster').classList.add('hidden');
-        }
-
-        function validarSenhaMaster() {
-            const senha = document.getElementById('inputSenhaMaster').value;
-            if(senha === 'sace26' || senha === 'master' || senha === '1234') {
-                fecharSenhaMaster();
-                document.getElementById('salaMasterModal').classList.remove('hidden');
-            } else {
-                alert('Senha Master incorreta. Acesso negado.');
-            }
-        }
-
-        function fecharSalaMasterModal() {
-            document.getElementById('salaMasterModal').classList.add('hidden');
-        }
-
-        function limparDiagnostico() {
-            const tbody = document.getElementById('tabelaDiagnostico');
-            tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-gray-500 font-medium">Nenhum risco pendente. Diagnóstico limpo com sucesso!</td></tr>`;
-        }
-
-        function toggleComercial() {
-            const conteudo = document.getElementById('conteudoComercial');
-            const btn = document.getElementById('btnToggleComercial');
-            conteudo.classList.toggle('hidden');
-            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function toggleBI() {
-            const conteudo = document.getElementById('conteudoBI');
-            const btn = document.getElementById('btnToggleBI');
-            conteudo.classList.toggle('hidden');
-            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function toggleCaixaOrcamentos() {
-            const conteudo = document.getElementById('conteudoOrcamentos');
-            const btn = document.getElementById('btnToggleOrcamentos');
-            conteudo.classList.toggle('hidden');
-            btn.innerText = conteudo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function abrirModalCaixaOrcamentos() {
-            document.getElementById('modalCaixaOrcamentos').classList.remove('hidden');
-        }
-
-        function fecharModalCaixaOrcamentos() {
-            document.getElementById('modalCaixaOrcamentos').classList.add('hidden');
-        }
-
-        function toggleMasterFiliais() {
-            const corpo = document.getElementById('corpoMasterFiliais');
-            const btn = document.getElementById('btnRecolherMaster');
-            corpo.classList.toggle('hidden');
-            btn.innerText = corpo.classList.contains('hidden') ? 'Expandir ▼' : 'Recolher ▲';
-        }
-
-        function abrirModalParceiro(tipo) {
-            tipoParceiroAtual = tipo;
-            document.getElementById('modalParceiroTitulo').innerText = 'Cadastrar ' + tipo;
-            document.getElementById('modalParceiro').classList.remove('hidden');
-        }
-
-        function fecharModalParceiro() {
-            document.getElementById('modalParceiro').classList.add('hidden');
-        }
-
-        function abrirModalFuncionario() {
-            document.getElementById('modalFuncionario').classList.remove('hidden');
-        }
-
-        function fecharModalFuncionario() {
-            document.getElementById('modalFuncionario').classList.add('hidden');
-        }
-
-        function abrirSeletorArquivo() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.pdf,.doc,.docx';
-            input.onchange = e => {
-                if(e.target.files.length > 0) {
-                    alert('Arquivo carregado com sucesso: ' + e.target.files[0].name);
-                }
-            };
-            input.click();
-        }
-
-        function calcularSimulador() {
-            const area = parseFloat(document.getElementById('inputArea').value) || 0;
-            const cartorio = area * 0.12;
-            const topo = area * 0.25;
-            const total = cartorio + topo;
-
-            document.getElementById('resCartorio').innerText = 'R$ ' + cartorio.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('resTopo').innerText = 'R$ ' + topo.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('resTotal').innerText = 'R$ ' + total.toLocaleString('pt-BR', {minimumFractionDigits: 2});
-
-            document.getElementById('resAdv').innerText = 'R$ ' + (total * 0.35).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('resTopog').innerText = 'R$ ' + (total * 0.50).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-            document.getElementById('resContab').innerText = 'R$ ' + (total * 0.15).toLocaleString('pt-BR', {minimumFractionDigits: 2});
-        }
-
-        function zerarSimulador() {
-            document.getElementById('inputArea').value = 0;
-            calcularSimulador();
-        }
-
-        function efetuarPagamento() {
-            alert('Transação segura iniciada e PDF disparado.');
-        }
-
-        function dispararWhatsApp() {
-            const total = document.getElementById('resTotal').innerText;
-            window.open(`https://api.whatsapp.com/send?text=Olá! Segue o orçamento oficial SACE para regularização REURB. Valor total estimado: ${total}.`, '_blank');
-        }
-
-        function dispararTelegram() {
-            const total = document.getElementById('resTotal').innerText;
-            window.open(`https://t.me/share/url?url=https://sace.adv.br&text=Orçamento SACE REURB - Total: ${total}. Acesse o portal para validar a conformidade.`, '_blank');
-        }
-
-        function salvarProposta() {
-            alert('Proposta salva no banco de dados!');
-        }
-
-        function salvarParceiroBanco() {
-            const nome = document.getElementById('pNome').value;
-            const reg = document.getElementById('pRegistro').value;
-            const contato = document.getElementById('pContato').value;
-            const split = document.getElementById('pSplit').value;
-
-            if(nome && reg) {
-                const tbody = document.getElementById('tabelaParceirosBody');
-                if(tbody.innerHTML.includes('Nenhum parceiro')) tbody.innerHTML = '';
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-3 font-semibold text-amber-500">${tipoParceiroAtual}</td>
-                    <td class="p-3 text-white font-medium">${nome}</td>
-                    <td class="p-3">${reg}</td>
-                    <td class="p-3 text-gray-400">${contato}</td>
-                    <td class="p-3 font-semibold text-emerald-400">${split}%</td>
-                    <td class="p-3"><button onclick="this.closest('tr').remove()" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-xs font-bold">Excluir</button></td>
-                `;
-                tbody.appendChild(tr);
-                fecharModalParceiro();
-                alert('Parceiro cadastrado com sucesso!');
-            } else {
-                alert('Preencha os campos obrigatórios.');
-            }
-        }
-
-        function salvarFuncionarioBanco() {
-            const filial = document.getElementById('fFilial').value;
-            const cargo = document.getElementById('fCargo').value;
-            const endereco = document.getElementById('fEndereco').value;
-            const rem = document.getElementById('fRem').value;
-            const senha = document.getElementById('fSenha').value;
-
-            if(filial && cargo) {
-                const tbody = document.getElementById('tabelaMasterBody');
-                if(tbody.innerHTML.includes('Nenhum funcionário')) tbody.innerHTML = '';
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-3 font-semibold text-amber-500">${filial}</td>
-                    <td class="p-3 text-white font-medium">${cargo}</td>
-                    <td class="p-3 text-gray-400">${endereco}</td>
-                    <td class="p-3 font-semibold text-emerald-400">R$ ${rem}</td>
-                    <td class="p-3 text-gray-400">${senha}</td>
-                    <td class="p-3"><button onclick="this.closest('tr').remove()" class="bg-red-600 hover:bg-red-700 text-white px-2.5 py-1 rounded text-xs font-bold">Excluir</button></td>
-                `;
-                tbody.appendChild(tr);
-                fecharModalFuncionario();
-                alert('Funcionário / Filial cadastrada com sucesso!');
-            } else {
-                alert('Preencha os campos obrigatórios.');
-            }
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const appContainer = document.getElementById('appContainer');
-            if (appContainer) {
-                appContainer.classList.add('hidden');
-            }
+        historico.forEach(item => {
+            tbody.innerHTML += `
+                <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 8px; color: var(--text-muted);">${item.dataHora}</td>
+                    <td style="padding: 8px; font-weight: bold; color: var(--accent-gold);">${item.filial}</td>
+                    <td style="padding: 8px;">${item.cliente}</td>
+                    <td style="padding: 8px;">${item.servico}</td>
+                    <td style="padding: 8px; color: var(--accent-green);">${item.valor}</td>
+                    <td style="padding: 8px;">${item.status}</td>
+                </tr>
+            `;
         });
-    </script>
+    }
+</script>
+
 </body>
 </html>
